@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
-    interface SettingsBlock
+    public abstract class SettingsBlock : System.Windows.Forms.UserControl
     {
+        public abstract BlockPanel makeNewBlockUsingSettings();
     }
 }

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
-    public interface BlockPanel
+    public abstract class BlockPanel : System.Windows.Forms.UserControl
     {
-
+        public abstract void updateTextFile();
     }
 }

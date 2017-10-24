@@ -10,56 +10,42 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class addPanel : Form
+    public partial class addPanelForm : Form
     {
         private MainForm mainWindow;
-        private SettingsBlock currentSettings;
-        public addPanel(MainForm mainWindow)
+        public addPanelForm(MainForm mainWindow)
         {
             InitializeComponent();
             itemComboBox.SelectedIndex = 0;
             this.mainWindow = mainWindow;
-            this.currentSettings = null;
+
         }
 
         private void itemComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (itemComboBox.SelectedIndex == 0)
+            switch (itemComboBox.SelectedIndex)
             {
-                descriptionTextBox.Text = "Pick an Item from the combobox above.";
+                case 0:
+                    descriptionTextBox.Text = "Pick an Item from the combobox above.";
+                    updatePanels(null, null);
+                    break;
+                case 1:
+                    descriptionTextBox.Text = "The String Text allows for text input. Basically anything ranging from all the leters to numbers and symbols can be inputed using this panel."
+                        + Environment.NewLine + Environment.NewLine + "Examples:" + Environment.NewLine + "Team Name" + Environment.NewLine + "Location Name";
 
-                previewGroupBox.Controls.Clear();
+                    updatePanels(new StringText(), new StringTextSettings());
+                    break;
+                case 2:
+                    descriptionTextBox.Text = "The Incremental Numerical allows for numerical input and incrementations. Only numbers can be present in this panel, no numbers or symbols. "
+                        + Environment.NewLine + Environment.NewLine + "Examples:" + Environment.NewLine + "Score" + Environment.NewLine + "Indicator of Half or Quarter" + Environment.NewLine + 
+                        "Number of shots on goal";
 
-            }
-            else if (itemComboBox.SelectedIndex == 1)
-            {
-                descriptionTextBox.Text = "The String Text allows for text input. Basically anything ranging from all the leters to numbers and symbols can be inputed using this panel." + Environment.NewLine + Environment.NewLine + "Examples:" + Environment.NewLine + "Team Name" + Environment.NewLine +"Location Name";
-
-                previewGroupBox.Controls.Clear();
-                StringText previewControl = new StringText();
-                previewGroupBox.Controls.Add(previewControl);
-                previewControl.Location = new Point((previewGroupBox.Height / 2) - (previewControl.Size.Height / 2), (previewGroupBox.Width / 2) - (previewControl.Size.Width / 2));
-
-                Point oldLocation = new Point(settingsGroupBox.Location.X, settingsGroupBox.Location.Y);
-                Size oldSize = new Size(settingsGroupBox.Width, settingsGroupBox.Height);
-
-                settingsGroupBox.Hide();
-
-                StringTextSettings newSettings = new StringTextSettings();
-                this.Controls.Add(newSettings);
-                newSettings.Size = oldSize;
-                newSettings.Location = oldLocation;
-            }
-            else if (itemComboBox.SelectedIndex == 2)
-            {
-                descriptionTextBox.Text = "The Incremental Numerical allows for numerical input and incrementations. Only numbers can be present in this panel, no numbers or symbols. " + Environment.NewLine + Environment.NewLine + "Examples:" + Environment.NewLine + "Score" + Environment.NewLine + "Indicator of Half or Quarter" + Environment.NewLine + "Number of shots on goal";
-
-                previewGroupBox.Controls.Clear();
-            } else if (itemComboBox.SelectedIndex == 3)
-            {
-                descriptionTextBox.Text = "The Timer allows for a countdown clock. " + Environment.NewLine + Environment.NewLine + "Examples:" + Environment.NewLine + "Game Clock" + Environment.NewLine + "Time out Clock";
-
-                previewGroupBox.Controls.Clear();
+                    updatePanels(new Blocks.IncrementalNumerical(), new Blocks.SettingsBlocks.IncrementalNumericalSettings());
+                    break;
+                case 3:
+                    descriptionTextBox.Text = "The Timer allows for a countdown clock. "
+                        + Environment.NewLine + Environment.NewLine + "Examples:" + Environment.NewLine + "Game Clock" + Environment.NewLine + "Time out Clock";
+                    break;
             }
         }
 
@@ -75,19 +61,40 @@ namespace WindowsFormsApplication1
                 case 0:
                     MessageBox.Show("You have not selected an item to add. Please choose an item from the combobox.");
                     break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
+                default:
+                    SettingsBlock currentSettings = (SettingsBlock)settingsGroupBox.Controls[0];
+                    this.mainWindow.addBlockPanel(currentSettings.makeNewBlockUsingSettings());
                     break;
             }
-            //this.mainWindow.addBlockPanel();
+            
         }
 
-        private void updateSettingsPanel()
+        private void updatePanels(BlockPanel block, SettingsBlock settingsBlock)
         {
+            if (block != null)
+            {
+                previewGroupBox.Controls.Clear();
+                UserControl previewControl = block;
+                previewGroupBox.Controls.Add(previewControl);
+                previewControl.Location = new Point((previewGroupBox.Height / 2) - (previewControl.Size.Height / 2), (previewGroupBox.Width / 2) - (previewControl.Size.Width / 2));
 
+                settingsGroupBox.Controls.Clear();
+                UserControl newSettings = settingsBlock;
+                newSettings.Location = new Point(1, 16);
+                settingsGroupBox.Controls.Add((UserControl)newSettings);
+
+            }
+            else
+            {
+                previewGroupBox.Controls.Clear();
+                settingsGroupBox.Controls.Clear();
+
+                Label newLabel = new Label();
+                newLabel.Text = "The currently selected item has no settings or defaults to configure.";
+                newLabel.Dock = DockStyle.Fill;
+                newLabel.AutoSize = false;
+                settingsGroupBox.Controls.Add(newLabel);
+            }
         }
     }
 }

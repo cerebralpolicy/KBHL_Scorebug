@@ -10,11 +10,24 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1
 {
-    public partial class StringText : UserControl, BlockPanel
+    public partial class StringText : BlockPanel
     {
+        String name;
         public StringText()
         {
             InitializeComponent();
+        }
+
+        public StringText(String name)
+        {
+            InitializeComponent();
+            this.groupBox.Text = name;
+            this.name = name;
+        }
+
+        public override void updateTextFile()
+        {
+            
         }
     }
 }

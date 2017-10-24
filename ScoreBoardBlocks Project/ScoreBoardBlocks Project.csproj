@@ -46,11 +46,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Blocks\NullSettings.cs">
+    <Compile Include="Blocks\IncrementalNumerical.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Blocks\NullSettings.Designer.cs">
-      <DependentUpon>NullSettings.cs</DependentUpon>
+    <Compile Include="Blocks\IncrementalNumerical.Designer.cs">
+      <DependentUpon>IncrementalNumerical.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Blocks\SettingsBlocks\IncrementalNumericalSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Blocks\SettingsBlocks\IncrementalNumericalSettings.Designer.cs">
+      <DependentUpon>IncrementalNumericalSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\addPanel.cs">
       <SubType>Form</SubType>
@@ -58,7 +64,9 @@
     <Compile Include="Forms\addPanel.Designer.cs">
       <DependentUpon>addPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Interfaces\BlockPanel.cs" />
+    <Compile Include="Abstracts\BlockPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -67,21 +75,26 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Interfaces\SettingsBlock.cs" />
+    <Compile Include="Abstracts\SettingsBlock.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Blocks\StringText.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Blocks\StringText.Designer.cs">
       <DependentUpon>StringText.cs</DependentUpon>
     </Compile>
-    <Compile Include="Blocks\StringTextSettings.cs">
+    <Compile Include="Blocks\SettingsBlocks\StringTextSettings.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Blocks\StringTextSettings.Designer.cs">
+    <Compile Include="Blocks\SettingsBlocks\StringTextSettings.Designer.cs">
       <DependentUpon>StringTextSettings.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Blocks\NullSettings.resx">
-      <DependentUpon>NullSettings.cs</DependentUpon>
+    <EmbeddedResource Include="Blocks\IncrementalNumerical.resx">
+      <DependentUpon>IncrementalNumerical.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Blocks\SettingsBlocks\IncrementalNumericalSettings.resx">
+      <DependentUpon>IncrementalNumericalSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\addPanel.resx">
       <DependentUpon>addPanel.cs</DependentUpon>
@@ -101,7 +114,7 @@
     <EmbeddedResource Include="Blocks\StringText.resx">
       <DependentUpon>StringText.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Blocks\StringTextSettings.resx">
+    <EmbeddedResource Include="Blocks\SettingsBlocks\StringTextSettings.resx">
       <DependentUpon>StringTextSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

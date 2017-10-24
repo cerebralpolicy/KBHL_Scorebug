@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication1.Blocks
+namespace WindowsFormsApplication1
 {
-    public partial class NullSettings : UserControl
+    public partial class StringTextSettings : SettingsBlock
     {
-        public NullSettings()
+        public StringTextSettings()
         {
             InitializeComponent();
+        }
+
+        public override BlockPanel makeNewBlockUsingSettings()
+        {
+            return new StringText(nameTextBox.Text);
         }
     }
 }

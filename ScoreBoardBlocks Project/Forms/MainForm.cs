@@ -24,17 +24,15 @@ namespace WindowsFormsApplication1
 
         private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Form newWindow = new addPanel(this);
+            Form newWindow = new addPanelForm(this);
             newWindow.Show();
         }
 
         public void addBlockPanel(BlockPanel panel)
         {
-            if (panel.GetType() == typeof(System.Windows.Forms.UserControl))
-            {
                 UserControl castedPanel = (UserControl)panel;
                 this.flowLayoutPanel.Controls.Add(castedPanel);
-            }
+                this.noPanelsLabel.Hide();
         }
     }
 }
