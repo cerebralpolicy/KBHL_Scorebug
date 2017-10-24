@@ -46,31 +46,47 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addPanel.cs">
+    <Compile Include="Blocks\NullSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Blocks\NullSettings.Designer.cs">
+      <DependentUpon>NullSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\addPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addPanel.Designer.cs">
+    <Compile Include="Forms\addPanel.Designer.cs">
       <DependentUpon>addPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="BlockPanel.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Interfaces\BlockPanel.cs" />
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StringText.cs">
+    <Compile Include="Interfaces\SettingsBlock.cs" />
+    <Compile Include="Blocks\StringText.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="StringText.Designer.cs">
+    <Compile Include="Blocks\StringText.Designer.cs">
       <DependentUpon>StringText.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="addPanel.resx">
+    <Compile Include="Blocks\StringTextSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Blocks\StringTextSettings.Designer.cs">
+      <DependentUpon>StringTextSettings.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Blocks\NullSettings.resx">
+      <DependentUpon>NullSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\addPanel.resx">
       <DependentUpon>addPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -82,8 +98,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="StringText.resx">
+    <EmbeddedResource Include="Blocks\StringText.resx">
       <DependentUpon>StringText.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Blocks\StringTextSettings.resx">
+      <DependentUpon>StringTextSettings.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -98,6 +117,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

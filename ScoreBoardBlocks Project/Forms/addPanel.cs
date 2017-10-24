@@ -13,11 +13,13 @@ namespace WindowsFormsApplication1
     public partial class addPanel : Form
     {
         private MainForm mainWindow;
+        private SettingsBlock currentSettings;
         public addPanel(MainForm mainWindow)
         {
             InitializeComponent();
             itemComboBox.SelectedIndex = 0;
             this.mainWindow = mainWindow;
+            this.currentSettings = null;
         }
 
         private void itemComboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -27,6 +29,7 @@ namespace WindowsFormsApplication1
                 descriptionTextBox.Text = "Pick an Item from the combobox above.";
 
                 previewGroupBox.Controls.Clear();
+
             }
             else if (itemComboBox.SelectedIndex == 1)
             {
@@ -36,6 +39,16 @@ namespace WindowsFormsApplication1
                 StringText previewControl = new StringText();
                 previewGroupBox.Controls.Add(previewControl);
                 previewControl.Location = new Point((previewGroupBox.Height / 2) - (previewControl.Size.Height / 2), (previewGroupBox.Width / 2) - (previewControl.Size.Width / 2));
+
+                Point oldLocation = new Point(settingsGroupBox.Location.X, settingsGroupBox.Location.Y);
+                Size oldSize = new Size(settingsGroupBox.Width, settingsGroupBox.Height);
+
+                settingsGroupBox.Hide();
+
+                StringTextSettings newSettings = new StringTextSettings();
+                this.Controls.Add(newSettings);
+                newSettings.Size = oldSize;
+                newSettings.Location = oldLocation;
             }
             else if (itemComboBox.SelectedIndex == 2)
             {
@@ -70,6 +83,11 @@ namespace WindowsFormsApplication1
                     break;
             }
             //this.mainWindow.addBlockPanel();
+        }
+
+        private void updateSettingsPanel()
+        {
+
         }
     }
 }
