@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WindowsFormsApplication1.Forms;
 
 namespace WindowsFormsApplication1
 {
@@ -33,6 +34,12 @@ namespace WindowsFormsApplication1
                 UserControl castedPanel = (UserControl)panel;
                 this.flowLayoutPanel.Controls.Add(castedPanel);
                 this.noPanelsLabel.Hide();
+        }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form newWindow = new HelpForm();
+            newWindow.Show();
         }
     }
 }

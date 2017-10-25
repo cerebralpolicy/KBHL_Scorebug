@@ -175,31 +175,31 @@
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.addItemToolStripMenuItem.Text = "Add Panel";
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // removePanelToolStripMenuItem
             // 
             this.removePanelToolStripMenuItem.Name = "removePanelToolStripMenuItem";
-            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.removePanelToolStripMenuItem.Text = "Remove Panel";
             // 
             // modifyOrderToolStripMenuItem
             // 
             this.modifyOrderToolStripMenuItem.Name = "modifyOrderToolStripMenuItem";
-            this.modifyOrderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.modifyOrderToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.modifyOrderToolStripMenuItem.Text = "Modify Order";
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(146, 6);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.lockToolStripMenuItem.Text = "Lock";
             // 
             // helpToolStripMenuItem
@@ -207,6 +207,7 @@
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.helpToolStripMenuItem.Text = "Help";
+            this.helpToolStripMenuItem.Click += new System.EventHandler(this.helpToolStripMenuItem_Click);
             // 
             // sceneNameLabel
             // 
