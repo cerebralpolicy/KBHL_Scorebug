@@ -58,11 +58,11 @@
     <Compile Include="Blocks\SettingsBlocks\IncrementalNumericalSettings.Designer.cs">
       <DependentUpon>IncrementalNumericalSettings.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\addPanel.cs">
+    <Compile Include="Forms\AddPanelForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\addPanel.Designer.cs">
-      <DependentUpon>addPanel.cs</DependentUpon>
+    <Compile Include="Forms\AddPanelForm.Designer.cs">
+      <DependentUpon>AddPanelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Abstracts\BlockPanel.cs">
       <SubType>UserControl</SubType>
@@ -78,6 +78,12 @@
     </Compile>
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\RemovePanelForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\RemovePanelForm.Designer.cs">
+      <DependentUpon>RemovePanelForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,20 +102,24 @@
     <Compile Include="Blocks\SettingsBlocks\StringTextSettings.Designer.cs">
       <DependentUpon>StringTextSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Scene.cs" />
     <EmbeddedResource Include="Blocks\IncrementalNumerical.resx">
       <DependentUpon>IncrementalNumerical.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Blocks\SettingsBlocks\IncrementalNumericalSettings.resx">
       <DependentUpon>IncrementalNumericalSettings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\addPanel.resx">
-      <DependentUpon>addPanel.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\AddPanelForm.resx">
+      <DependentUpon>AddPanelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\HelpForm.resx">
       <DependentUpon>HelpForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\RemovePanelForm.resx">
+      <DependentUpon>RemovePanelForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

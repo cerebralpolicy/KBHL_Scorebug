@@ -29,25 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HelpForm));
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.youtubeLinkLabel = new System.Windows.Forms.LinkLabel();
             this.githubMainLinkLabel = new System.Windows.Forms.LinkLabel();
             this.githubWikiLinkLabel = new System.Windows.Forms.LinkLabel();
             this.discordLinkLabel = new System.Windows.Forms.LinkLabel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.lclogo;
-            this.pictureBox1.Location = new System.Drawing.Point(307, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // label1
             // 
@@ -106,11 +96,21 @@
             this.discordLinkLabel.AutoSize = true;
             this.discordLinkLabel.Location = new System.Drawing.Point(13, 184);
             this.discordLinkLabel.Name = "discordLinkLabel";
-            this.discordLinkLabel.Size = new System.Drawing.Size(122, 13);
+            this.discordLinkLabel.Size = new System.Drawing.Size(154, 13);
             this.discordLinkLabel.TabIndex = 4;
             this.discordLinkLabel.TabStop = true;
-            this.discordLinkLabel.Text = "Marcus\'s Discord Server";
+            this.discordLinkLabel.Text = "Marcus\'s Public Discord Server";
             this.discordLinkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.discordLinkLabel_LinkClicked);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.lclogo;
+            this.pictureBox1.Location = new System.Drawing.Point(307, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(150, 150);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // HelpForm
             // 

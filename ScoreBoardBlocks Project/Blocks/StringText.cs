@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
 {
     public partial class StringText : BlockPanel
     {
-        String name;
+
         public StringText()
         {
             InitializeComponent();
@@ -22,12 +22,18 @@ namespace WindowsFormsApplication1
         {
             InitializeComponent();
             this.groupBox.Text = name;
-            this.name = name;
+            setName(name);
         }
 
         public override void updateTextFile()
         {
             
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
     }
 }

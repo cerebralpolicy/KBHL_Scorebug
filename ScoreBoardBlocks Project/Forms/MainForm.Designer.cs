@@ -62,8 +62,9 @@
             this.flowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel.Location = new System.Drawing.Point(12, 50);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(768, 356);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(784, 356);
             this.flowLayoutPanel.TabIndex = 0;
+            this.flowLayoutPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel_DragEnter);
             // 
             // menuStrip1
             // 
@@ -74,7 +75,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(792, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(808, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -182,8 +183,9 @@
             // removePanelToolStripMenuItem
             // 
             this.removePanelToolStripMenuItem.Name = "removePanelToolStripMenuItem";
-            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.removePanelToolStripMenuItem.Text = "Remove Panel";
+            this.removePanelToolStripMenuItem.Click += new System.EventHandler(this.removePanelToolStripMenuItem_Click);
             // 
             // modifyOrderToolStripMenuItem
             // 
@@ -199,8 +201,9 @@
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lockToolStripMenuItem.Text = "Lock";
+            this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -215,7 +218,7 @@
             this.sceneNameLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.sceneNameLabel.Location = new System.Drawing.Point(0, 24);
             this.sceneNameLabel.Name = "sceneNameLabel";
-            this.sceneNameLabel.Size = new System.Drawing.Size(792, 23);
+            this.sceneNameLabel.Size = new System.Drawing.Size(808, 23);
             this.sceneNameLabel.TabIndex = 0;
             this.sceneNameLabel.Text = "New Scene";
             this.sceneNameLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -227,7 +230,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.noPanelsLabel.Location = new System.Drawing.Point(72, 63);
             this.noPanelsLabel.Name = "noPanelsLabel";
-            this.noPanelsLabel.Size = new System.Drawing.Size(654, 293);
+            this.noPanelsLabel.Size = new System.Drawing.Size(670, 293);
             this.noPanelsLabel.TabIndex = 0;
             this.noPanelsLabel.Text = "You currently have no panels or a scene openned. Use the menu buttons above to st" +
     "art.";
@@ -237,7 +240,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 418);
+            this.ClientSize = new System.Drawing.Size(808, 418);
             this.Controls.Add(this.noPanelsLabel);
             this.Controls.Add(this.sceneNameLabel);
             this.Controls.Add(this.flowLayoutPanel);
