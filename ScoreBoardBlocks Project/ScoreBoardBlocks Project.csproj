@@ -7,11 +7,26 @@
     <ProjectGuid>{AA02AE86-26C8-4290-9E40-04325CD44E5B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication1</RootNamespace>
+    <RootNamespace>ScoreBoardBlocksOBS</RootNamespace>
     <AssemblyName>ScoreBoardBlocks Project</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +61,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blocks\SettingsBlocks\TimerCountDownSettings.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Blocks\SettingsBlocks\TimerCountDownSettings.Designer.cs">
+      <DependentUpon>TimerCountDownSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Blocks\TimerCountDown.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Blocks\TimerCountDown.Designer.cs">
+      <DependentUpon>TimerCountDown.cs</DependentUpon>
+    </Compile>
     <Compile Include="Blocks\IncrementalNumerical.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -85,6 +112,12 @@
     <Compile Include="Forms\RemovePanelForm.Designer.cs">
       <DependentUpon>RemovePanelForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\SceneSettingsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\SceneSettingsForm.Designer.cs">
+      <DependentUpon>SceneSettingsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Abstracts\SettingsBlock.cs">
@@ -103,6 +136,12 @@
       <DependentUpon>StringTextSettings.cs</DependentUpon>
     </Compile>
     <Compile Include="Scene.cs" />
+    <EmbeddedResource Include="Blocks\SettingsBlocks\TimerCountDownSettings.resx">
+      <DependentUpon>TimerCountDownSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Blocks\TimerCountDown.resx">
+      <DependentUpon>TimerCountDown.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Blocks\IncrementalNumerical.resx">
       <DependentUpon>IncrementalNumerical.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RemovePanelForm.resx">
       <DependentUpon>RemovePanelForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\SceneSettingsForm.resx">
+      <DependentUpon>SceneSettingsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -152,6 +194,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\lclogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

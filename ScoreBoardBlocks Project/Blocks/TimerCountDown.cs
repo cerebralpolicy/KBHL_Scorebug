@@ -10,27 +10,25 @@ using System.Windows.Forms;
 
 namespace WindowsFormsApplication1.Blocks
 {
-    public partial class IncrementalNumerical : BlockPanel
+    public partial class TimerCountDown : BlockPanel
     {
-        int customInterval;
-        bool ordinal;
-        int currentValue;
+        int currentTimeInSeconds; 
 
-        public IncrementalNumerical()
+        public TimerCountDown()
         {
             InitializeComponent();
         }
 
-        public IncrementalNumerical(String name, int customInterval, bool ordinal)
+        public TimerCountDown(String name, int startingMinutes, int startingSeconds)
         {
             InitializeComponent();
             setName(name);
             groupBox.Text = name;
-            this.customInterval = customInterval;
-            plusCustomButton.Text = "+" + this.customInterval;
-            minusCustomButton.Text = "-" + this.customInterval;
-            this.ordinal = ordinal;
-            this.currentValue = 0;
+            this.currentTimeInSeconds = (startingMinutes * 60) + startingSeconds;
+            int minutes = (currentTimeInSeconds - (currentTimeInSeconds % 60)) / 60;
+            int seconds = currentTimeInSeconds % 60;
+
+            currentTimeTextBox.Text = Convert.ToString(minutes) + ":" + Convert.ToString(seconds);
 
         }
 

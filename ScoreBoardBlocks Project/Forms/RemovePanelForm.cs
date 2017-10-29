@@ -30,7 +30,7 @@ namespace WindowsFormsApplication1.Forms
                 {
                     mainWindow.getCurrentScene().removeBlock(blockListBox.SelectedIndex);
                     updateBlockList();
-                    mainWindow.updateBlockContainer();
+                    mainWindow.updateForm();
                 }
             }
             else

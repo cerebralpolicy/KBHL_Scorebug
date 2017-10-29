@@ -25,15 +25,15 @@ namespace WindowsFormsApplication1
             setName(name);
         }
 
-        public override void updateTextFile()
-        {
-            
-        }
-
         public override string ToString()
         {
             return base.ToString();
         }
 
+        private void changeButton_Click(object sender, EventArgs e)
+        {
+            writeToFile(changeTextBox.Text);
+            currentTextBox.Text = changeTextBox.Text;
+        }
     }
 }

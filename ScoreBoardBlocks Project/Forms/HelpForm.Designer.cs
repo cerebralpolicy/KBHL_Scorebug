@@ -104,7 +104,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::WindowsFormsApplication1.Properties.Resources.lclogo;
+            this.pictureBox1.Image = global::ScoreBoardBlocksOBS.Properties.Resources.lclogo;
             this.pictureBox1.Location = new System.Drawing.Point(307, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(150, 150);

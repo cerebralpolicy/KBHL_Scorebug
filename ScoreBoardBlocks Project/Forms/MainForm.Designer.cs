@@ -35,22 +35,25 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sceneManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recentScenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sceneCollectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.saveSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.manageScenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recentScenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editCurrentSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removePanelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.modifyOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sceneSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.lockToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sceneNameLabel = new System.Windows.Forms.Label();
             this.noPanelsLabel = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,7 +65,7 @@
             this.flowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel.Location = new System.Drawing.Point(12, 50);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(784, 356);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(784, 320);
             this.flowLayoutPanel.TabIndex = 0;
             this.flowLayoutPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel_DragEnter);
             // 
@@ -110,63 +113,73 @@
             // sceneManagerToolStripMenuItem
             // 
             this.sceneManagerToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.recentScenesToolStripMenuItem,
+            this.sceneCollectionToolStripMenuItem,
             this.toolStripSeparator1,
             this.newSceneToolStripMenuItem,
             this.loadSceneToolStripMenuItem,
             this.saveSceneToolStripMenuItem,
             this.toolStripSeparator2,
-            this.manageScenesToolStripMenuItem});
+            this.manageScenesToolStripMenuItem,
+            this.recentScenesToolStripMenuItem});
             this.sceneManagerToolStripMenuItem.Name = "sceneManagerToolStripMenuItem";
             this.sceneManagerToolStripMenuItem.Size = new System.Drawing.Size(100, 20);
             this.sceneManagerToolStripMenuItem.Text = "Scene Manager";
             // 
-            // recentScenesToolStripMenuItem
+            // sceneCollectionToolStripMenuItem
             // 
-            this.recentScenesToolStripMenuItem.Name = "recentScenesToolStripMenuItem";
-            this.recentScenesToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.recentScenesToolStripMenuItem.Text = "Recent Scenes";
+            this.sceneCollectionToolStripMenuItem.Name = "sceneCollectionToolStripMenuItem";
+            this.sceneCollectionToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.sceneCollectionToolStripMenuItem.Text = "Scene Collection";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(153, 6);
-            // 
-            // newSceneToolStripMenuItem
-            // 
-            this.newSceneToolStripMenuItem.Name = "newSceneToolStripMenuItem";
-            this.newSceneToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.newSceneToolStripMenuItem.Text = "New Scene";
-            // 
-            // loadSceneToolStripMenuItem
-            // 
-            this.loadSceneToolStripMenuItem.Name = "loadSceneToolStripMenuItem";
-            this.loadSceneToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.loadSceneToolStripMenuItem.Text = "Load Scene";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
             // 
             // saveSceneToolStripMenuItem
             // 
             this.saveSceneToolStripMenuItem.Name = "saveSceneToolStripMenuItem";
-            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.saveSceneToolStripMenuItem.Text = "Save Scene";
+            this.saveSceneToolStripMenuItem.Click += new System.EventHandler(this.saveSceneToolStripMenuItem_Click);
+            // 
+            // newSceneToolStripMenuItem
+            // 
+            this.newSceneToolStripMenuItem.Name = "newSceneToolStripMenuItem";
+            this.newSceneToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.newSceneToolStripMenuItem.Text = "New Scene";
+            this.newSceneToolStripMenuItem.Click += new System.EventHandler(this.newSceneToolStripMenuItem_Click);
+            // 
+            // loadSceneToolStripMenuItem
+            // 
+            this.loadSceneToolStripMenuItem.Name = "loadSceneToolStripMenuItem";
+            this.loadSceneToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.loadSceneToolStripMenuItem.Text = "Load Scene";
+            this.loadSceneToolStripMenuItem.Click += new System.EventHandler(this.loadSceneToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(153, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(159, 6);
             // 
             // manageScenesToolStripMenuItem
             // 
             this.manageScenesToolStripMenuItem.Name = "manageScenesToolStripMenuItem";
-            this.manageScenesToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
+            this.manageScenesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.manageScenesToolStripMenuItem.Text = "Manage Scenes";
+            // 
+            // recentScenesToolStripMenuItem
+            // 
+            this.recentScenesToolStripMenuItem.Name = "recentScenesToolStripMenuItem";
+            this.recentScenesToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.recentScenesToolStripMenuItem.Text = "Recent Scenes";
             // 
             // editCurrentSceneToolStripMenuItem
             // 
             this.editCurrentSceneToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addItemToolStripMenuItem,
             this.removePanelToolStripMenuItem,
-            this.modifyOrderToolStripMenuItem,
+            this.sceneSettingsToolStripMenuItem,
             this.toolStripSeparator4,
             this.lockToolStripMenuItem});
             this.editCurrentSceneToolStripMenuItem.Name = "editCurrentSceneToolStripMenuItem";
@@ -176,32 +189,33 @@
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.addItemToolStripMenuItem.Text = "Add Panel";
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // removePanelToolStripMenuItem
             // 
             this.removePanelToolStripMenuItem.Name = "removePanelToolStripMenuItem";
-            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.removePanelToolStripMenuItem.Text = "Remove Panel";
             this.removePanelToolStripMenuItem.Click += new System.EventHandler(this.removePanelToolStripMenuItem_Click);
             // 
-            // modifyOrderToolStripMenuItem
+            // sceneSettingsToolStripMenuItem
             // 
-            this.modifyOrderToolStripMenuItem.Name = "modifyOrderToolStripMenuItem";
-            this.modifyOrderToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
-            this.modifyOrderToolStripMenuItem.Text = "Modify Order";
+            this.sceneSettingsToolStripMenuItem.Name = "sceneSettingsToolStripMenuItem";
+            this.sceneSettingsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.sceneSettingsToolStripMenuItem.Text = "Scene Settings";
+            this.sceneSettingsToolStripMenuItem.Click += new System.EventHandler(this.sceneSettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(146, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(147, 6);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.lockToolStripMenuItem.Text = "Lock";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
@@ -230,23 +244,28 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.noPanelsLabel.Location = new System.Drawing.Point(72, 63);
             this.noPanelsLabel.Name = "noPanelsLabel";
-            this.noPanelsLabel.Size = new System.Drawing.Size(670, 293);
+            this.noPanelsLabel.Size = new System.Drawing.Size(670, 257);
             this.noPanelsLabel.TabIndex = 0;
             this.noPanelsLabel.Text = "You currently have no panels or a scene openned. Use the menu buttons above to st" +
     "art.";
             this.noPanelsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(808, 418);
+            this.ClientSize = new System.Drawing.Size(808, 382);
             this.Controls.Add(this.noPanelsLabel);
             this.Controls.Add(this.sceneNameLabel);
             this.Controls.Add(this.flowLayoutPanel);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(483, 306);
+            this.MinimumSize = new System.Drawing.Size(512, 265);
             this.Name = "MainForm";
             this.Text = "ScoreBoard";
             this.menuStrip1.ResumeLayout(false);
@@ -265,7 +284,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sceneManagerToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem recentScenesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sceneCollectionToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem newSceneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadSceneToolStripMenuItem;
@@ -276,11 +295,14 @@
         private System.Windows.Forms.ToolStripMenuItem editCurrentSceneToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem addItemToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removePanelToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem modifyOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sceneSettingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem lockToolStripMenuItem;
         private System.Windows.Forms.Label sceneNameLabel;
         private System.Windows.Forms.Label noPanelsLabel;
+        private System.Windows.Forms.ToolStripMenuItem recentScenesToolStripMenuItem;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }
 

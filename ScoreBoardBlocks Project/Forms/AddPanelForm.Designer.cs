@@ -66,7 +66,8 @@
             "Select an Item",
             "String Text",
             "Incremental Numerical",
-            "Timer"});
+            "TimerCountDown",
+            "TimerStopWatch"});
             this.itemComboBox.Location = new System.Drawing.Point(15, 14);
             this.itemComboBox.Name = "itemComboBox";
             this.itemComboBox.Size = new System.Drawing.Size(324, 21);

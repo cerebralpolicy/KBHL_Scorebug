@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFormsApplication1.Forms;
 using WindowsFormsApplication1;
+using System.IO;
 
 namespace WindowsFormsApplication1
 {
@@ -26,7 +27,7 @@ namespace WindowsFormsApplication1
             this.currentScene = new Scene();
             this.dragAllowed = true;
             sceneNameLabel.Text = this.currentScene.getName();
-            updateBlockContainer();
+            updateForm();
         }
 
         // Closes the program
@@ -46,7 +47,7 @@ namespace WindowsFormsApplication1
         public void addBlockPanel(BlockPanel panel)
         {
             this.currentScene.addBlock(panel);
-            updateBlockContainer();
+            updateForm();
         }
 
         // Shows the help form
@@ -57,7 +58,7 @@ namespace WindowsFormsApplication1
         }
 
         // Update the FlowLayout container with current scene's block array
-        public void updateBlockContainer()
+        private void updateBlockContainer()
         {
             flowLayoutPanel.Controls.Clear();
             if (this.currentScene.getBlockArray().Count > 0)
@@ -72,8 +73,14 @@ namespace WindowsFormsApplication1
             {
                 this.noPanelsLabel.Show();
             }
-            
 
+        }
+
+        // A public method to update the form after changes were made to it
+        public void updateForm()
+        {
+            updateBlockContainer();
+            sceneNameLabel.Text = this.currentScene.getName();
         }
 
         // Controls drag and drop inside the FlowLayout container
@@ -92,7 +99,6 @@ namespace WindowsFormsApplication1
             {
                 addItemToolStripMenuItem.Enabled = false;
                 removePanelToolStripMenuItem.Enabled = false;
-                modifyOrderToolStripMenuItem.Enabled = false;
                 this.dragAllowed = false;
                 lockToolStripMenuItem.Text = "Unlock";
             }
@@ -100,22 +106,81 @@ namespace WindowsFormsApplication1
             {
                 addItemToolStripMenuItem.Enabled = true;
                 removePanelToolStripMenuItem.Enabled = true;
-                modifyOrderToolStripMenuItem.Enabled = true;
                 this.dragAllowed = true;
                 lockToolStripMenuItem.Text = "Lock";
             }
 
         }
 
+        // Opens the remove panel window
         private void removePanelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form newWindow = new RemovePanelForm(this);
             newWindow.Show();
         }
 
+        // Public method to obtain the current scene from anywhere
         public Scene getCurrentScene()
         {
             return this.currentScene;
+        }
+
+        // Opens the settings page for the current scene
+        private void sceneSettingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form newWindow = new SceneSettingsForm(this);
+            newWindow.Show();
+        }
+
+        // Asks the user before wiping the scene
+        private void newSceneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DialogResult dialog = MessageBox.Show("Are you sure you want to create a new scene? (Make sure you save the scene before clicking Yes)", "", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.Yes)
+            {
+                this.currentScene = new Scene();
+                updateForm();
+            }
+        }
+
+        // Loads the instance of the current scene from a file and loads it into the current session
+        private void loadSceneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            openFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            openFileDialog1.Filter = "Scene Files | .sbb";
+            DialogResult saveDialog = openFileDialog1.ShowDialog();
+
+            if (saveDialog == DialogResult.OK || !saveFileDialog1.CheckPathExists)
+            {
+                using (Stream stream = File.Open(openFileDialog1.FileName, FileMode.Open))
+                {
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                    this.currentScene = (Scene)bformatter.Deserialize(stream);
+                    updateForm();
+                }
+            }
+        }
+
+        // Saves the instance of the current scene to a file
+        private void saveSceneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            saveFileDialog1.FileName = this.currentScene.getName() + ".sbb";
+            saveFileDialog1.Filter = "Scene Files | .sbb";
+            DialogResult saveDialog = saveFileDialog1.ShowDialog();
+
+            if (saveDialog == DialogResult.OK || !saveFileDialog1.CheckPathExists) 
+            {
+                using (Stream stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
+                {
+                    var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
+
+                    bformatter.Serialize(stream, this.currentScene);
+                }
+            }
+
+
         }
     }
 }

@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.groupBox = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.changeButton = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.currentTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.changeTextBox = new System.Windows.Forms.TextBox();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -41,9 +41,9 @@
             // 
             this.groupBox.Controls.Add(this.changeButton);
             this.groupBox.Controls.Add(this.label2);
-            this.groupBox.Controls.Add(this.textBox2);
+            this.groupBox.Controls.Add(this.currentTextBox);
             this.groupBox.Controls.Add(this.label1);
-            this.groupBox.Controls.Add(this.textBox1);
+            this.groupBox.Controls.Add(this.changeTextBox);
             this.groupBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox.Location = new System.Drawing.Point(0, 0);
             this.groupBox.Name = "groupBox";
@@ -52,12 +52,32 @@
             this.groupBox.TabStop = false;
             this.groupBox.Text = "String Text:";
             // 
-            // textBox1
+            // changeButton
             // 
-            this.textBox1.Location = new System.Drawing.Point(6, 37);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 20);
-            this.textBox1.TabIndex = 0;
+            this.changeButton.Location = new System.Drawing.Point(69, 121);
+            this.changeButton.Name = "changeButton";
+            this.changeButton.Size = new System.Drawing.Size(75, 23);
+            this.changeButton.TabIndex = 2;
+            this.changeButton.Text = "Change";
+            this.changeButton.UseVisualStyleBackColor = true;
+            this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(3, 60);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(74, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Current String:";
+            // 
+            // currentTextBox
+            // 
+            this.currentTextBox.Location = new System.Drawing.Point(6, 76);
+            this.currentTextBox.Name = "currentTextBox";
+            this.currentTextBox.ReadOnly = true;
+            this.currentTextBox.Size = new System.Drawing.Size(138, 20);
+            this.currentTextBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -68,31 +88,12 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Change String:";
             // 
-            // changeButton
+            // changeTextBox
             // 
-            this.changeButton.Location = new System.Drawing.Point(69, 121);
-            this.changeButton.Name = "changeButton";
-            this.changeButton.Size = new System.Drawing.Size(75, 23);
-            this.changeButton.TabIndex = 2;
-            this.changeButton.Text = "Change";
-            this.changeButton.UseVisualStyleBackColor = true;
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(6, 76);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(138, 20);
-            this.textBox2.TabIndex = 0;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 60);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(74, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Current String:";
+            this.changeTextBox.Location = new System.Drawing.Point(6, 37);
+            this.changeTextBox.Name = "changeTextBox";
+            this.changeTextBox.Size = new System.Drawing.Size(138, 20);
+            this.changeTextBox.TabIndex = 0;
             // 
             // StringText
             // 
@@ -111,8 +112,8 @@
         private System.Windows.Forms.GroupBox groupBox;
         private System.Windows.Forms.Button changeButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox currentTextBox;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox changeTextBox;
     }
 }
