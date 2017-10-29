@@ -38,5 +38,21 @@ namespace WindowsFormsApplication1.Blocks
         {
             return base.ToString();
         }
+
+        public override List<string> returnProperties()
+        {
+            List<String> properties = new List<String>();
+            properties.Add(this.getName());
+            properties.Add(Convert.ToString(customInterval));
+            properties.Add(Convert.ToString(ordinal));
+            return properties;
+        }
+
+        public override void applyProperties(List<String> properties)
+        {
+            this.setName(properties[1]);
+            this.customInterval = Convert.ToInt32(properties[2]);
+            this.ordinal = Convert.ToBoolean(properties[3]);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScoreBoardBlocksOBS;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,15 +10,22 @@ namespace WindowsFormsApplication1
     [Serializable]
     public class Scene
     {
-        private List<BlockPanel> blocksArray;
-        private String name;
-        private String folderPath;
+        protected String name;
+        protected String folderPath;
+        protected List<List<String>> stringBlocksArray;
 
-        public Scene()
+        [field:NonSerialized]
+        private List<BlockPanel> blocksArray;
+
+        [field:NonSerialized]
+        protected MainForm mainWindow;
+
+        public Scene(MainForm mainWindow)
         {
             this.blocksArray = new List<BlockPanel>();
             this.name = "New Scene";
             this.folderPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Output\\" + this.name);
+            this.mainWindow = mainWindow;
         }
 
         public void addBlock(BlockPanel block)
@@ -63,6 +71,34 @@ namespace WindowsFormsApplication1
                 blocksArray[x].setScenePath(this.folderPath);
             }
         }
-        
+
+        public void prepareForSave()
+        {
+            this.stringBlocksArray = new List<List<string>>();
+
+            for (int x = 0; x < this.blocksArray.Count; x++)
+            {
+                List<String> block = new List<String>();
+                block.Add(Convert.ToString(this.blocksArray[x].GetType()));
+                block.AddRange(this.blocksArray[x].returnProperties());
+
+                this.stringBlocksArray.Add(block);
+            }
+        }
+
+        public void prepareForLoad()
+        {
+            this.blocksArray = new List<BlockPanel>();
+
+            for (int x = 0; x < this.stringBlocksArray.Count; x++)
+            {
+                Type type = Type.GetType(this.stringBlocksArray[x][0]);
+                BlockPanel newBlock = (BlockPanel)Activator.CreateInstance(type);
+                newBlock.applyProperties(this.stringBlocksArray[x]);
+
+                this.blocksArray.Add(newBlock);
+            }
+        }
+
     }
 }

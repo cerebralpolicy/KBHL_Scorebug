@@ -24,7 +24,7 @@ namespace WindowsFormsApplication1
         {
             // Initializes form and creates a new scene
             InitializeComponent();
-            this.currentScene = new Scene();
+            this.currentScene = new Scene(this);
             this.dragAllowed = true;
             sceneNameLabel.Text = this.currentScene.getName();
             updateForm();
@@ -135,10 +135,10 @@ namespace WindowsFormsApplication1
         // Asks the user before wiping the scene
         private void newSceneToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = MessageBox.Show("Are you sure you want to create a new scene? (Make sure you save the scene before clicking Yes)", "", MessageBoxButtons.YesNo);
+            DialogResult dialog = MessageBox.Show("Are you sure you want to create a new scene? Any unsaved changes will be lost.", "", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.Yes)
             {
-                this.currentScene = new Scene();
+                this.currentScene = new Scene(this);
                 updateForm();
             }
         }
@@ -146,18 +146,26 @@ namespace WindowsFormsApplication1
         // Loads the instance of the current scene from a file and loads it into the current session
         private void loadSceneToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Code to initialize file dialog
             openFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            openFileDialog1.Filter = "Scene Files | .sbb";
+            openFileDialog1.Filter = "Scene Files (*.sbb) |*.sbb";
+            openFileDialog1.FileName = "";
             DialogResult saveDialog = openFileDialog1.ShowDialog();
 
             if (saveDialog == DialogResult.OK || !saveFileDialog1.CheckPathExists)
             {
+                // Deserializes from file
                 using (Stream stream = File.Open(openFileDialog1.FileName, FileMode.Open))
                 {
                     var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 
                     this.currentScene = (Scene)bformatter.Deserialize(stream);
+                    // Since we had to convert all BlockPanels to string equilivents, now we have to load those
+                    // strings and convert them into actual blocks
+                    this.currentScene.prepareForLoad();
                     updateForm();
+
+                    MessageBox.Show("Scene loaded successfully.");
                 }
             }
         }
@@ -165,22 +173,26 @@ namespace WindowsFormsApplication1
         // Saves the instance of the current scene to a file
         private void saveSceneToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Code to initialize file dialog
             saveFileDialog1.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
             saveFileDialog1.FileName = this.currentScene.getName() + ".sbb";
-            saveFileDialog1.Filter = "Scene Files | .sbb";
+            saveFileDialog1.Filter = "Scene Files (*.sbb) |*.sbb";
             DialogResult saveDialog = saveFileDialog1.ShowDialog();
 
             if (saveDialog == DialogResult.OK || !saveFileDialog1.CheckPathExists) 
             {
+                // Serialize the Scene object to file
                 using (Stream stream = File.Open(saveFileDialog1.FileName, FileMode.Create))
                 {
                     var bformatter = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
+                    // Since usercontrols are not serializable, the function below converts all the unserializable
+                    // BlockPanels into their string equivilents, which allow the scene to be serialized
+                    this.currentScene.prepareForSave();
                     bformatter.Serialize(stream, this.currentScene);
+
+                    MessageBox.Show("Scene saved successfully.");
                 }
             }
-
-
         }
     }
 }

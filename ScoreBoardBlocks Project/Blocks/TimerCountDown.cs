@@ -36,5 +36,21 @@ namespace WindowsFormsApplication1.Blocks
         {
             return base.ToString();
         }
+
+        public override List<string> returnProperties()
+        {
+            List<string> properties = new List<string>();
+            properties.Add(this.getName());
+            properties.Add(Convert.ToString(this.currentTimeInSeconds));
+
+            return properties;
+            
+        }
+
+        public override void applyProperties(List<String> properties)
+        {
+            this.setName(properties[1]);
+            this.currentTimeInSeconds = Convert.ToInt32(properties[2]);
+        }
     }
 }

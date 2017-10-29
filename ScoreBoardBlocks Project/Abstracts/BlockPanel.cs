@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsApplication1
 {
-    [Serializable]
     public abstract class BlockPanel : System.Windows.Forms.UserControl
     {
         private String currentScenePath;
@@ -16,6 +15,11 @@ namespace WindowsFormsApplication1
         public void setName(String name)
         {
             this.name = name;
+        }
+
+        public String getName()
+        {
+            return this.name;
         }
         public String toString()
         {
@@ -39,5 +43,8 @@ namespace WindowsFormsApplication1
         {
             this.currentScenePath = scenePath;
         }
+
+        public abstract List<String> returnProperties();
+        public abstract void applyProperties(List<String> properties);
     }
 }
