@@ -1,6 +1,7 @@
 ﻿using ScoreBoardBlocksOBS;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -69,6 +70,19 @@ namespace WindowsFormsApplication1
             for (int x = 0; x < blocksArray.Count; x++)
             {
                 blocksArray[x].setScenePath(this.folderPath);
+            }
+        }
+
+        public void activateBlocks()
+        {
+            if (!Directory.Exists(this.folderPath))
+            {
+                Directory.CreateDirectory(this.folderPath);
+            }
+
+            for (int x = 0; x < blocksArray.Count; x++)
+            {
+                blocksArray[x].makeTextFile();
             }
         }
 

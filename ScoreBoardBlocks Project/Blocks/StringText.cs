@@ -23,13 +23,8 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             this.groupBox.Text = name;
             setName(name);
-        }
 
-        public StringText(List<String> properties)
-        {
-            InitializeComponent();
-            setName(properties[1]);
-            this.groupBox.Text = properties[2];
+            //makeTextFile();
         }
 
         public override string ToString()

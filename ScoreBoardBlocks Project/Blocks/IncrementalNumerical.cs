@@ -31,7 +31,6 @@ namespace WindowsFormsApplication1.Blocks
             minusCustomButton.Text = "-" + this.customInterval;
             this.ordinal = ordinal;
             this.currentValue = 0;
-
         }
 
         public override string ToString()
@@ -45,6 +44,7 @@ namespace WindowsFormsApplication1.Blocks
             properties.Add(this.getName());
             properties.Add(Convert.ToString(customInterval));
             properties.Add(Convert.ToString(ordinal));
+            properties.Add(Convert.ToString(currentValue));
             return properties;
         }
 
@@ -53,6 +53,49 @@ namespace WindowsFormsApplication1.Blocks
             this.setName(properties[1]);
             this.customInterval = Convert.ToInt32(properties[2]);
             this.ordinal = Convert.ToBoolean(properties[3]);
+            this.currentValue = Convert.ToInt32(properties[4]);
+        }
+
+        private void plusOneButton_Click(object sender, EventArgs e)
+        {
+            this.currentValue += 1;
+            this.currentNumberTextBox.Text = this.currentValue.ToString();
+            this.writeToFile(this.currentValue.ToString());
+        }
+
+        private void minusOneButton_Click(object sender, EventArgs e)
+        {
+            this.currentValue -= 1;
+            this.currentNumberTextBox.Text = this.currentValue.ToString();
+            this.writeToFile(this.currentValue.ToString());
+        }
+
+        private void plusCustomButton_Click(object sender, EventArgs e)
+        {
+            this.currentValue += this.customInterval;
+            this.currentNumberTextBox.Text = this.currentValue.ToString();
+            this.writeToFile(this.currentValue.ToString());
+        }
+
+        private void minusCustomButton_Click(object sender, EventArgs e)
+        {
+            this.currentValue -= this.customInterval;
+            this.currentNumberTextBox.Text = this.currentValue.ToString();
+            this.writeToFile(this.currentValue.ToString());
+        }
+
+        private void zeroButton_Click(object sender, EventArgs e)
+        {
+            this.currentValue = 0;
+            this.currentNumberTextBox.Text = this.currentValue.ToString();
+            this.writeToFile(this.currentValue.ToString());
+        }
+
+        private void changeButton_Click(object sender, EventArgs e)
+        {
+            this.currentValue = Convert.ToInt32(this.quickChangeTextBox.Text);
+            this.currentNumberTextBox.Text = this.currentValue.ToString();
+            this.writeToFile(this.currentValue.ToString());
         }
     }
 }

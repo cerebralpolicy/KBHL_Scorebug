@@ -18,6 +18,7 @@ namespace WindowsFormsApplication1
         // Declaring private fields
         private Scene currentScene;
         private bool dragAllowed;
+        private bool isLocked;
 
         // Constructor
         public MainForm()
@@ -26,6 +27,7 @@ namespace WindowsFormsApplication1
             InitializeComponent();
             this.currentScene = new Scene(this);
             this.dragAllowed = true;
+            this.isLocked = false;
             sceneNameLabel.Text = this.currentScene.getName();
             updateForm();
         }
@@ -66,6 +68,15 @@ namespace WindowsFormsApplication1
                 this.noPanelsLabel.Hide();
                 for (int x = 0; x < this.currentScene.getBlockArray().Count; x++)
                 {
+                    if (isLocked == false)
+                    {
+                        this.currentScene.getBlockArray()[x].startDemo();
+                    }
+                    else
+                    {
+                        this.currentScene.getBlockArray()[x].endDemo();
+                    }
+
                     this.flowLayoutPanel.Controls.Add(this.currentScene.getBlockArray()[x]);
                 }
             }
@@ -100,16 +111,21 @@ namespace WindowsFormsApplication1
                 addItemToolStripMenuItem.Enabled = false;
                 removePanelToolStripMenuItem.Enabled = false;
                 this.dragAllowed = false;
+                this.isLocked = true;
                 lockToolStripMenuItem.Text = "Unlock";
-            }
+                statusLabel.Text = "ScoreBoardBlocksOBS is now active. Blocks are now able to be interacted with and output files will begin outputting.";
+                this.currentScene.activateBlocks();
+            } 
             else if (lockToolStripMenuItem.Text == "Unlock")
             {
                 addItemToolStripMenuItem.Enabled = true;
                 removePanelToolStripMenuItem.Enabled = true;
                 this.dragAllowed = true;
+                this.isLocked = false;
                 lockToolStripMenuItem.Text = "Lock";
+                statusLabel.Text = "ScoreBoardBlocksOBS is currently in designer mode. Click Edit Current Scene > Lock in order to interact with blocks.";
             }
-
+            updateBlockContainer();
         }
 
         // Opens the remove panel window

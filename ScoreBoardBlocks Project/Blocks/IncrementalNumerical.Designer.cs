@@ -29,14 +29,14 @@
         private void InitializeComponent()
         {
             this.groupBox = new System.Windows.Forms.GroupBox();
-            this.changeButton = new System.Windows.Forms.Button();
-            this.currentNumberTextBox = new System.Windows.Forms.TextBox();
-            this.plusOneButton = new System.Windows.Forms.Button();
-            this.plusCustomButton = new System.Windows.Forms.Button();
-            this.minusOneButton = new System.Windows.Forms.Button();
-            this.minusCustomButton = new System.Windows.Forms.Button();
             this.quickChangeTextBox = new System.Windows.Forms.TextBox();
-            this.button5 = new System.Windows.Forms.Button();
+            this.minusCustomButton = new System.Windows.Forms.Button();
+            this.minusOneButton = new System.Windows.Forms.Button();
+            this.zeroButton = new System.Windows.Forms.Button();
+            this.plusCustomButton = new System.Windows.Forms.Button();
+            this.plusOneButton = new System.Windows.Forms.Button();
+            this.currentNumberTextBox = new System.Windows.Forms.TextBox();
+            this.changeButton = new System.Windows.Forms.Button();
             this.groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,7 +45,7 @@
             this.groupBox.Controls.Add(this.quickChangeTextBox);
             this.groupBox.Controls.Add(this.minusCustomButton);
             this.groupBox.Controls.Add(this.minusOneButton);
-            this.groupBox.Controls.Add(this.button5);
+            this.groupBox.Controls.Add(this.zeroButton);
             this.groupBox.Controls.Add(this.plusCustomButton);
             this.groupBox.Controls.Add(this.plusOneButton);
             this.groupBox.Controls.Add(this.currentNumberTextBox);
@@ -58,14 +58,62 @@
             this.groupBox.TabStop = false;
             this.groupBox.Text = "Incremental Numerical:";
             // 
-            // changeButton
+            // quickChangeTextBox
             // 
-            this.changeButton.Location = new System.Drawing.Point(81, 119);
-            this.changeButton.Name = "changeButton";
-            this.changeButton.Size = new System.Drawing.Size(63, 23);
-            this.changeButton.TabIndex = 2;
-            this.changeButton.Text = "Change";
-            this.changeButton.UseVisualStyleBackColor = true;
+            this.quickChangeTextBox.Location = new System.Drawing.Point(6, 121);
+            this.quickChangeTextBox.Name = "quickChangeTextBox";
+            this.quickChangeTextBox.Size = new System.Drawing.Size(69, 20);
+            this.quickChangeTextBox.TabIndex = 5;
+            // 
+            // minusCustomButton
+            // 
+            this.minusCustomButton.Location = new System.Drawing.Point(101, 84);
+            this.minusCustomButton.Name = "minusCustomButton";
+            this.minusCustomButton.Size = new System.Drawing.Size(43, 23);
+            this.minusCustomButton.TabIndex = 4;
+            this.minusCustomButton.Text = "-7";
+            this.minusCustomButton.UseVisualStyleBackColor = true;
+            this.minusCustomButton.Click += new System.EventHandler(this.minusCustomButton_Click);
+            // 
+            // minusOneButton
+            // 
+            this.minusOneButton.Location = new System.Drawing.Point(101, 55);
+            this.minusOneButton.Name = "minusOneButton";
+            this.minusOneButton.Size = new System.Drawing.Size(43, 23);
+            this.minusOneButton.TabIndex = 4;
+            this.minusOneButton.Text = "-1";
+            this.minusOneButton.UseVisualStyleBackColor = true;
+            this.minusOneButton.Click += new System.EventHandler(this.minusOneButton_Click);
+            // 
+            // zeroButton
+            // 
+            this.zeroButton.Location = new System.Drawing.Point(55, 84);
+            this.zeroButton.Name = "zeroButton";
+            this.zeroButton.Size = new System.Drawing.Size(40, 23);
+            this.zeroButton.TabIndex = 4;
+            this.zeroButton.Text = "0";
+            this.zeroButton.UseVisualStyleBackColor = true;
+            this.zeroButton.Click += new System.EventHandler(this.zeroButton_Click);
+            // 
+            // plusCustomButton
+            // 
+            this.plusCustomButton.Location = new System.Drawing.Point(6, 84);
+            this.plusCustomButton.Name = "plusCustomButton";
+            this.plusCustomButton.Size = new System.Drawing.Size(43, 23);
+            this.plusCustomButton.TabIndex = 4;
+            this.plusCustomButton.Text = "+7";
+            this.plusCustomButton.UseVisualStyleBackColor = true;
+            this.plusCustomButton.Click += new System.EventHandler(this.plusCustomButton_Click);
+            // 
+            // plusOneButton
+            // 
+            this.plusOneButton.Location = new System.Drawing.Point(6, 55);
+            this.plusOneButton.Name = "plusOneButton";
+            this.plusOneButton.Size = new System.Drawing.Size(43, 23);
+            this.plusOneButton.TabIndex = 4;
+            this.plusOneButton.Text = "+1";
+            this.plusOneButton.UseVisualStyleBackColor = true;
+            this.plusOneButton.Click += new System.EventHandler(this.plusOneButton_Click);
             // 
             // currentNumberTextBox
             // 
@@ -78,57 +126,15 @@
             this.currentNumberTextBox.Text = "0";
             this.currentNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // plusOneButton
+            // changeButton
             // 
-            this.plusOneButton.Location = new System.Drawing.Point(6, 55);
-            this.plusOneButton.Name = "plusOneButton";
-            this.plusOneButton.Size = new System.Drawing.Size(43, 23);
-            this.plusOneButton.TabIndex = 4;
-            this.plusOneButton.Text = "+1";
-            this.plusOneButton.UseVisualStyleBackColor = true;
-            // 
-            // plusCustomButton
-            // 
-            this.plusCustomButton.Location = new System.Drawing.Point(6, 84);
-            this.plusCustomButton.Name = "plusCustomButton";
-            this.plusCustomButton.Size = new System.Drawing.Size(43, 23);
-            this.plusCustomButton.TabIndex = 4;
-            this.plusCustomButton.Text = "+7";
-            this.plusCustomButton.UseVisualStyleBackColor = true;
-            // 
-            // minusOneButton
-            // 
-            this.minusOneButton.Location = new System.Drawing.Point(101, 55);
-            this.minusOneButton.Name = "minusOneButton";
-            this.minusOneButton.Size = new System.Drawing.Size(43, 23);
-            this.minusOneButton.TabIndex = 4;
-            this.minusOneButton.Text = "-1";
-            this.minusOneButton.UseVisualStyleBackColor = true;
-            // 
-            // minusCustomButton
-            // 
-            this.minusCustomButton.Location = new System.Drawing.Point(101, 84);
-            this.minusCustomButton.Name = "minusCustomButton";
-            this.minusCustomButton.Size = new System.Drawing.Size(43, 23);
-            this.minusCustomButton.TabIndex = 4;
-            this.minusCustomButton.Text = "-7";
-            this.minusCustomButton.UseVisualStyleBackColor = true;
-            // 
-            // quickChangeTextBox
-            // 
-            this.quickChangeTextBox.Location = new System.Drawing.Point(6, 121);
-            this.quickChangeTextBox.Name = "quickChangeTextBox";
-            this.quickChangeTextBox.Size = new System.Drawing.Size(69, 20);
-            this.quickChangeTextBox.TabIndex = 5;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(55, 84);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(40, 23);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "0";
-            this.button5.UseVisualStyleBackColor = true;
+            this.changeButton.Location = new System.Drawing.Point(81, 119);
+            this.changeButton.Name = "changeButton";
+            this.changeButton.Size = new System.Drawing.Size(63, 23);
+            this.changeButton.TabIndex = 2;
+            this.changeButton.Text = "Change";
+            this.changeButton.UseVisualStyleBackColor = true;
+            this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
             // 
             // IncrementalNumerical
             // 
@@ -149,7 +155,7 @@
         private System.Windows.Forms.TextBox quickChangeTextBox;
         private System.Windows.Forms.Button minusCustomButton;
         private System.Windows.Forms.Button minusOneButton;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button zeroButton;
         private System.Windows.Forms.Button plusCustomButton;
         private System.Windows.Forms.Button plusOneButton;
         private System.Windows.Forms.TextBox currentNumberTextBox;

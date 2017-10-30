@@ -37,9 +37,9 @@
             this.sceneManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sceneCollectionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.saveSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveSceneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.manageScenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.recentScenesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,7 +54,10 @@
             this.noPanelsLabel = new System.Windows.Forms.Label();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // flowLayoutPanel
@@ -65,7 +68,7 @@
             this.flowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.flowLayoutPanel.Location = new System.Drawing.Point(12, 50);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(784, 320);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(784, 307);
             this.flowLayoutPanel.TabIndex = 0;
             this.flowLayoutPanel.DragEnter += new System.Windows.Forms.DragEventHandler(this.flowLayoutPanel_DragEnter);
             // 
@@ -136,13 +139,6 @@
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(159, 6);
             // 
-            // saveSceneToolStripMenuItem
-            // 
-            this.saveSceneToolStripMenuItem.Name = "saveSceneToolStripMenuItem";
-            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.saveSceneToolStripMenuItem.Text = "Save Scene";
-            this.saveSceneToolStripMenuItem.Click += new System.EventHandler(this.saveSceneToolStripMenuItem_Click);
-            // 
             // newSceneToolStripMenuItem
             // 
             this.newSceneToolStripMenuItem.Name = "newSceneToolStripMenuItem";
@@ -156,6 +152,13 @@
             this.loadSceneToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
             this.loadSceneToolStripMenuItem.Text = "Load Scene";
             this.loadSceneToolStripMenuItem.Click += new System.EventHandler(this.loadSceneToolStripMenuItem_Click);
+            // 
+            // saveSceneToolStripMenuItem
+            // 
+            this.saveSceneToolStripMenuItem.Name = "saveSceneToolStripMenuItem";
+            this.saveSceneToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.saveSceneToolStripMenuItem.Text = "Save Scene";
+            this.saveSceneToolStripMenuItem.Click += new System.EventHandler(this.saveSceneToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
@@ -189,33 +192,33 @@
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addItemToolStripMenuItem.Text = "Add Panel";
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
             // removePanelToolStripMenuItem
             // 
             this.removePanelToolStripMenuItem.Name = "removePanelToolStripMenuItem";
-            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.removePanelToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.removePanelToolStripMenuItem.Text = "Remove Panel";
             this.removePanelToolStripMenuItem.Click += new System.EventHandler(this.removePanelToolStripMenuItem_Click);
             // 
             // sceneSettingsToolStripMenuItem
             // 
             this.sceneSettingsToolStripMenuItem.Name = "sceneSettingsToolStripMenuItem";
-            this.sceneSettingsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.sceneSettingsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.sceneSettingsToolStripMenuItem.Text = "Scene Settings";
             this.sceneSettingsToolStripMenuItem.Click += new System.EventHandler(this.sceneSettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(147, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(149, 6);
             // 
             // lockToolStripMenuItem
             // 
             this.lockToolStripMenuItem.Name = "lockToolStripMenuItem";
-            this.lockToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
+            this.lockToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.lockToolStripMenuItem.Text = "Lock";
             this.lockToolStripMenuItem.Click += new System.EventHandler(this.lockToolStripMenuItem_Click);
             // 
@@ -254,11 +257,30 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 360);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(808, 22);
+            this.statusStrip1.SizingGrip = false;
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(617, 17);
+            this.statusLabel.Text = "ScoreBoardBlocksOBS is currently in designer mode. Click Edit Current Scene > Loc" +
+    "k in order to interact with blocks.";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 382);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.noPanelsLabel);
             this.Controls.Add(this.sceneNameLabel);
             this.Controls.Add(this.flowLayoutPanel);
@@ -267,9 +289,11 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(512, 265);
             this.Name = "MainForm";
-            this.Text = "ScoreBoard";
+            this.Text = "ScoreBoardBlocksOBS";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,6 +327,8 @@
         private System.Windows.Forms.ToolStripMenuItem recentScenesToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
     }
 }
 

@@ -28,7 +28,11 @@ namespace WindowsFormsApplication1
 
         public void makeTextFile()
         {
-            using (File.Create(Path.Combine(this.currentScenePath, this.name + ".txt"))) { }
+            String filePath = Path.Combine(this.currentScenePath, this.name + ".txt");
+            if (!File.Exists(filePath))
+            {
+                using (File.Create(filePath)) { }
+            }
         }
 
         public void writeToFile(String value)
@@ -42,6 +46,22 @@ namespace WindowsFormsApplication1
         public void setScenePath(String scenePath)
         {
             this.currentScenePath = scenePath;
+        }
+
+        public void startDemo()
+        {
+            for (int x = 0; x < this.Controls.Count; x++)
+            {
+                this.Controls[x].Enabled = false;
+            }
+        }
+
+        public void endDemo()
+        {
+            for (int x = 0; x < this.Controls.Count; x++)
+            {
+                this.Controls[x].Enabled = true;
+            }
         }
 
         public abstract List<String> returnProperties();
