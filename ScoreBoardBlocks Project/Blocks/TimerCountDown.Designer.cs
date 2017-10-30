@@ -68,6 +68,7 @@
             this.stopButton.TabIndex = 6;
             this.stopButton.Text = "Stop";
             this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
             // 
             // startButton
             // 
@@ -77,6 +78,7 @@
             this.startButton.TabIndex = 6;
             this.startButton.Text = "Start";
             this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // secondsTextBox
             // 
@@ -100,6 +102,7 @@
             this.minusOneButton.TabIndex = 4;
             this.minusOneButton.Text = "-1";
             this.minusOneButton.UseVisualStyleBackColor = true;
+            this.minusOneButton.Click += new System.EventHandler(this.minusOneButton_Click);
             // 
             // plusOneButton
             // 
@@ -109,6 +112,7 @@
             this.plusOneButton.TabIndex = 4;
             this.plusOneButton.Text = "+1";
             this.plusOneButton.UseVisualStyleBackColor = true;
+            this.plusOneButton.Click += new System.EventHandler(this.plusOneButton_Click);
             // 
             // currentTimeTextBox
             // 
@@ -129,10 +133,12 @@
             this.changeButton.TabIndex = 2;
             this.changeButton.Text = "Change";
             this.changeButton.UseVisualStyleBackColor = true;
+            this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
             // 
             // timer
             // 
             this.timer.Interval = 1000;
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // TimerCountDown
             // 

@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1.Blocks
 {
     public partial class TimerCountDown : BlockPanel
     {
-        int currentTimeInSeconds; 
+        private int currentTimeInSeconds;
 
         public TimerCountDown()
         {
@@ -51,6 +51,47 @@ namespace WindowsFormsApplication1.Blocks
         {
             this.setName(properties[1]);
             this.currentTimeInSeconds = Convert.ToInt32(properties[2]);
+        }
+
+        private void startButton_Click(object sender, EventArgs e)
+        {
+            startButton.Enabled = false;
+            stopButton.Enabled = true;
+            timer.Enabled = true;
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            startButton.Enabled = true;
+            stopButton.Enabled = false;
+            timer.Enabled = false;
+        }
+
+        private void changeButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            if (this.currentTimeInSeconds > 0)
+            {
+                this.currentTimeInSeconds--;
+            }
+            else
+            {
+                timer.Enabled = false;
+            }
+        }
+
+        private void plusOneButton_Click(object sender, EventArgs e)
+        {
+            this.currentTimeInSeconds++;
+        }
+
+        private void minusOneButton_Click(object sender, EventArgs e)
+        {
+            this.currentTimeInSeconds--;
         }
     }
 }
