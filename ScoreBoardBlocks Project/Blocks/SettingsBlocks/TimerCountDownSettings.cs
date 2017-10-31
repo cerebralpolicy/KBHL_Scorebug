@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1.Blocks.SettingsBlocks
 {
     public partial class TimerCountDownSettings : SettingsBlock
     {
-        public TimerCountDownSettings(MainForm mainWindow)
+        public TimerCountDownSettings()
         {
             InitializeComponent();
         }

@@ -54,6 +54,7 @@ namespace WindowsFormsApplication1
                 case 3:
                     descriptionTextBox.Text = "The Timer allows for a countdown clock. "
                         + Environment.NewLine + Environment.NewLine + "Examples:" + Environment.NewLine + "Game Clock" + Environment.NewLine + "Time out Clock";
+                    updatePanels(new Blocks.TimerCountDown(), new Blocks.SettingsBlocks.TimerCountDownSettings());
                     break;
             }
         }

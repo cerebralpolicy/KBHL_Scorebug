@@ -24,7 +24,6 @@ namespace WindowsFormsApplication1
             this.groupBox.Text = name;
             setName(name);
 
-            //makeTextFile();
         }
 
         public override string ToString()
@@ -49,6 +48,7 @@ namespace WindowsFormsApplication1
         public override void applyProperties(List<String> properties)
         {
             this.setName(properties[1]);
+            this.groupBox.Text = getName();
             currentTextBox.Text = properties[2];
         }
     }

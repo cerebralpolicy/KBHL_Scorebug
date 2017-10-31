@@ -51,6 +51,7 @@ namespace WindowsFormsApplication1.Blocks
         public override void applyProperties(List<String> properties)
         {
             this.setName(properties[1]);
+            this.groupBox.Text = getName();
             this.customInterval = Convert.ToInt32(properties[2]);
             this.ordinal = Convert.ToBoolean(properties[3]);
             this.currentValue = Convert.ToInt32(properties[4]);

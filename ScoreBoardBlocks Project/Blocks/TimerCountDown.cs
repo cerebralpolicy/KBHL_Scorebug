@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1.Blocks
             int minutes = (currentTimeInSeconds - (currentTimeInSeconds % 60)) / 60;
             int seconds = currentTimeInSeconds % 60;
 
-            currentTimeTextBox.Text = Convert.ToString(minutes) + ":" + Convert.ToString(seconds);
+            updateClockTextBox(minutes, seconds);
 
         }
 
@@ -50,6 +50,7 @@ namespace WindowsFormsApplication1.Blocks
         public override void applyProperties(List<String> properties)
         {
             this.setName(properties[1]);
+            this.groupBox.Text = getName();
             this.currentTimeInSeconds = Convert.ToInt32(properties[2]);
         }
 
@@ -69,6 +70,17 @@ namespace WindowsFormsApplication1.Blocks
 
         private void changeButton_Click(object sender, EventArgs e)
         {
+            int minutes = Convert.ToInt32(minuteTextBox.Text);
+            int seconds = Convert.ToInt32(secondsTextBox.Text);
+
+            if (seconds > 60 || seconds < 0 || minutes < 0)
+            {
+                MessageBox.Show("Invalid time input.");
+            }
+            else
+            {
+                updateClockTextBox(minutes, seconds);
+            }
 
         }
 
@@ -77,6 +89,14 @@ namespace WindowsFormsApplication1.Blocks
             if (this.currentTimeInSeconds > 0)
             {
                 this.currentTimeInSeconds--;
+
+                int minutes = (currentTimeInSeconds - (currentTimeInSeconds % 60)) / 60;
+                int seconds = currentTimeInSeconds % 60;
+
+                updateClockTextBox(minutes, seconds);
+
+                minuteTextBox.Text = minutes.ToString();
+                secondsTextBox.Text = seconds.ToString();
             }
             else
             {
@@ -87,11 +107,36 @@ namespace WindowsFormsApplication1.Blocks
         private void plusOneButton_Click(object sender, EventArgs e)
         {
             this.currentTimeInSeconds++;
+
+            int minutes = (currentTimeInSeconds - (currentTimeInSeconds % 60)) / 60;
+            int seconds = currentTimeInSeconds % 60;
+
+            updateClockTextBox(minutes, seconds);
         }
 
         private void minusOneButton_Click(object sender, EventArgs e)
         {
             this.currentTimeInSeconds--;
+
+            int minutes = (currentTimeInSeconds - (currentTimeInSeconds % 60)) / 60;
+            int seconds = currentTimeInSeconds % 60;
+
+            updateClockTextBox(minutes, seconds);
+        }
+
+        public void updateClockTextBox(int mins, int secs)
+        {
+            String time;
+            if (secs < 10)
+            {
+                time = mins.ToString() + ":0" + secs.ToString();
+            } else
+            {
+                time = mins.ToString() + ":" + secs.ToString();
+            }
+
+            this.currentTimeTextBox.Text = time;
+            writeToFile(time);
         }
     }
 }
