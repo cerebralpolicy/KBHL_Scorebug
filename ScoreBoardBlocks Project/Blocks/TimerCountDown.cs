@@ -28,7 +28,7 @@ namespace WindowsFormsApplication1.Blocks
             int minutes = (currentTimeInSeconds - (currentTimeInSeconds % 60)) / 60;
             int seconds = currentTimeInSeconds % 60;
 
-            updateClockTextBox(minutes, seconds);
+            updateInitialClockTextBox(minutes, seconds);
 
         }
 
@@ -137,6 +137,21 @@ namespace WindowsFormsApplication1.Blocks
 
             this.currentTimeTextBox.Text = time;
             writeToFile(time);
+        }
+
+        public void updateInitialClockTextBox(int mins, int secs)
+        {
+            String time;
+            if (secs < 10)
+            {
+                time = mins.ToString() + ":0" + secs.ToString();
+            }
+            else
+            {
+                time = mins.ToString() + ":" + secs.ToString();
+            }
+
+            this.currentTimeTextBox.Text = time;
         }
     }
 }
