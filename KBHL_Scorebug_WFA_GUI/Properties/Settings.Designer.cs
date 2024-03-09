@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScoreBoardBlocksOBS.Properties {
+namespace KBHL_Scorebug_WFA_GUI.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -23,14 +23,14 @@ namespace ScoreBoardBlocksOBS.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Specialized.StringCollection recentFiles {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Forms\\Outputs" +
+            "\\ScoreboardDB.mdf;Integrated Security=True")]
+        public string ScoreboardDBConnectionString {
             get {
-                return ((global::System.Collections.Specialized.StringCollection)(this["recentFiles"]));
-            }
-            set {
-                this["recentFiles"] = value;
+                return ((string)(this["ScoreboardDBConnectionString"]));
             }
         }
     }

@@ -1,0 +1,28 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+svg {
+  width: 90vw;
+  height: auto;
+}
+
+text {
+  font-size: 48px;
+  fill: white;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.goals {
+  font-size: 48px;
+  fill: white;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}

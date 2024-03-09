@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "KBHL_Scorebug_GUI": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:62104"
+    }
+  }
+}

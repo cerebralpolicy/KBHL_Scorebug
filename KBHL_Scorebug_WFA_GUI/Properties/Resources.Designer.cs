@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ScoreBoardBlocksOBS.Properties {
+namespace KBHL_Scorebug_WFA_GUI.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace ScoreBoardBlocksOBS.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ScoreBoardBlocksOBS.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("KBHL_Scorebug_WFA_GUI.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,61 @@ namespace ScoreBoardBlocksOBS.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to #FF0000.
+        ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static string color1 {
+        internal static byte[] _60s_Scoreboard {
             get {
-                return ResourceManager.GetString("color1", resourceCulture);
+                object obj = ResourceManager.GetObject("_60s_Scoreboard", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap lclogo {
+        internal static System.Drawing.Bitmap goalBG {
             get {
-                object obj = ResourceManager.GetObject("lclogo", resourceCulture);
+                object obj = ResourceManager.GetObject("goalBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] Octin_College_Bold {
+            get {
+                object obj = ResourceManager.GetObject("Octin_College_Bold", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap penaltyBG {
+            get {
+                object obj = ResourceManager.GetObject("penaltyBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap periodBG {
+            get {
+                object obj = ResourceManager.GetObject("periodBG", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shotBG {
+            get {
+                object obj = ResourceManager.GetObject("shotBG", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
