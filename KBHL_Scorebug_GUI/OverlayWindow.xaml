@@ -5,71 +5,134 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KBHL_Scorebug_GUI"
         xmlns:f="clr-namespace:KBHL_Scorebug_GUI.Functions"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         mc:Ignorable="d"
-        Title="OverlayWindow" Height="224" Width="840" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}">
+        Title="OverlayWindow" Height="224" Width="868" WindowStyle="None" AllowsTransparency="True" Background="{x:Null}" FontFamily="{DynamicResource ScorebugMonoFont}" FontWeight="Bold">
     <Window.Resources>
         <f:ScorebugGlossScale x:Key="ScorebugGlossScale"/>
         <Style x:Key="ScorebugText_Black" TargetType="{x:Type TextBlock}">
             <Setter Property="TextWrapping" Value="NoWrap"/>
             <Setter Property="TextTrimming" Value="None"/>
         </Style>
-        <FontFamily x:Key="ScorebugFontFamily">Circular Std Bold</FontFamily>
-    </Window.Resources>
-        <Grid x:Name="grid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="7*"/>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="4*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="48"/>
-                <RowDefinition x:Name="MainStrip" Height="48" MinHeight="{Binding Height.Value, Converter={StaticResource ScorebugGlossScale}, RelativeSource={RelativeSource Mode=Self}}"/>
-                <RowDefinition x:Name="InfoStrip" Height="32" MinHeight="{Binding ActualHeight, Converter={StaticResource ScorebugGlossScale}, Mode=OneWay, RelativeSource={RelativeSource Mode=Self}}" />
-                <RowDefinition Height="32"/>
-                <RowDefinition Height="32"/>
-            </Grid.RowDefinitions>
 
-            <Rectangle Grid.ColumnSpan="1" VerticalAlignment="Center" Fill="{DynamicResource ScorebugWhiteFill}" Height="{Binding RowDefinitions/Height.Value, ElementName=grid, Mode=OneWay}" StrokeThickness="2" Stroke="{DynamicResource ScorebugWhite}" Grid.Row="1"/>
-            <Rectangle Grid.Column="3" HorizontalAlignment="Center" Height="{Binding RowDefinitions/Height.Value, ElementName=grid, Mode=OneWay}" Stroke="{DynamicResource ScorebugWhite}" VerticalAlignment="Center" Width="196" StrokeThickness="2" Fill="Red" Grid.Row="1"/>
-            <Rectangle Grid.Column="4" HorizontalAlignment="Center" Height="{Binding RowDefinitions/Height.Value, ElementName=grid, Mode=OneWay}" Stroke="{DynamicResource ScorebugWhite}" VerticalAlignment="Center" Width="84" StrokeThickness="2" Fill="#FF333333" Grid.Row="1"/>
-            <Rectangle Grid.Column="1" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="Blue" Grid.Row="1"/>
-            <Rectangle Grid.Column="2" HorizontalAlignment="Center" Height="{Binding RowDefinitions/Height.Value, ElementName=grid, Mode=OneWay}" Stroke="{DynamicResource ScorebugWhite}" VerticalAlignment="Center" Width="84" StrokeThickness="2" Fill="#FF333333" Grid.Row="1"/>
-            <Rectangle Grid.Column="5" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="#FFC7C7C7" Grid.ColumnSpan="2" Grid.Row="1"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" Text="KBHL" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Black Italic" FontSize="36" Foreground="{DynamicResource ScorebugBlackText}" Height="44" Grid.Row="1"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="36" Grid.Column="1" Margin="49,0,0,0" Text="AWAY" Height="42" Foreground="{DynamicResource ScorebugWhite}" Grid.Row="1"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="{DynamicResource ScorebugFontFamily}" FontSize="36" Grid.Column="3" Margin="49,0,0,0" Text="HOME" Height="42" Foreground="{DynamicResource ScorebugWhite}" Grid.Row="1"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="36" Grid.Column="4" Text="0" Height="42" Foreground="{DynamicResource ScorebugWhite}" Grid.Row="1"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="36" Grid.Column="2" Text="0" Height="42" Foreground="{DynamicResource ScorebugWhite}" Grid.Row="1"/>
-            <TextBlock Grid.Column="5" TextWrapping="Wrap" Text="1st" VerticalAlignment="Center" FontFamily="{DynamicResource ScorebugFontFamily}" FontSize="36" TextAlignment="Right" Foreground="{DynamicResource ScorebugBlackText}" Margin="0,0,4,0" Height="44" Grid.Row="1"/>
-        <TextBlock x:Name="PeriodTimeDisplay" Grid.Column="6" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{DynamicResource ScorebugBlackText}" FontFamily="{DynamicResource ScorebugFontFamily}" FontSize="36" TextAlignment="Center" Height="44" Grid.Row="1" Text="{Binding PeriodTimeRemaining_bug, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OverlayWindow}}}"/>
-            <Rectangle x:Name="PenInfobox" Grid.Column="1" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="#FFC8C800" Grid.RowSpan="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="AwayPPTypeField" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="1" Text="POWERPLAY" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="2" Padding="0,1,0,0" Height="32"/>
-            <TextBlock x:Name="AwayPPClockField" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="2" Text="2:00" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="2" Padding="0,1,0,0" Height="32"/>
-            <Rectangle Grid.ColumnSpan="2" VerticalAlignment="Top" Fill="#3FFFFFFF" Height="12" StrokeThickness="2" Grid.Row="2" Grid.Column="1" />
-            <Rectangle x:Name="PenInfobox_Copy" Grid.Column="1" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="#FFC8C800" Grid.RowSpan="1" Grid.Row="3" Grid.ColumnSpan="2"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="1" Text="DELAYED PENALTY" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="3" Padding="0,1,0,0" Height="32" Grid.ColumnSpan="2"/>
-            <Rectangle Grid.ColumnSpan="2" VerticalAlignment="Top" Fill="#3FFFFFFF" Height="12" StrokeThickness="2" Grid.Row="3" Grid.Column="1" />
-            <Rectangle x:Name="PenInfobox_Copy1" Grid.Column="1" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="{DynamicResource ScorebugWhiteFill}" Grid.RowSpan="1" Grid.Row="4" Grid.ColumnSpan="1"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="1" Text="EMPTY NET" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="4" Padding="0,1,0,0" Height="32"/>
-            <Rectangle Grid.ColumnSpan="1" VerticalAlignment="Top" Fill="#3FFFFFFF" StrokeThickness="2" Grid.Row="4" Grid.Column="1" Height="12" />
-            <Rectangle Grid.ColumnSpan="7" VerticalAlignment="Top" Fill="#3FFFFFFF" StrokeThickness="2" Grid.Row="1" Height="18"/>
-            <Rectangle x:Name="PenInfobox_Copy2" Grid.Column="3" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="#FFC8C800" Grid.RowSpan="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="AwayPPTypeField_Copy" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="3" Text="POWERPLAY" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="2" Padding="0,1,0,0" Height="32"/>
-            <TextBlock x:Name="AwayPPClockField_Copy" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="4" Text="2:00" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="2" Padding="0,1,0,0" Height="32"/>
-            <Rectangle Grid.ColumnSpan="2" VerticalAlignment="Top" Fill="#3FFFFFFF" Height="12" StrokeThickness="2" Grid.Row="2" Grid.Column="3" />
-            <Rectangle x:Name="PenInfobox_Copy3" Grid.Column="3" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="#FFC8C800" Grid.RowSpan="1" Grid.Row="3" Grid.ColumnSpan="2"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="3" Text="DELAYED PENALTY" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="3" Padding="0,1,0,0" Height="32" Grid.ColumnSpan="2"/>
-            <Rectangle Grid.ColumnSpan="2" VerticalAlignment="Top" Fill="#3FFFFFFF" StrokeThickness="2" Grid.Row="3" Grid.Column="3" Height="12" />
-            <Rectangle x:Name="PenInfobox_Copy4" Grid.Column="3" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="{DynamicResource ScorebugWhiteFill}" Grid.RowSpan="1" Grid.Row="4" Grid.ColumnSpan="1"/>
-            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="3" Text="EMPTY NET" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="4" Padding="0,1,0,0" Height="32"/>
-            <Rectangle Grid.ColumnSpan="1" VerticalAlignment="Top" Fill="#3FFFFFFF" StrokeThickness="2" Grid.Row="4" Grid.Column="3" Height="12" />
-            <Rectangle x:Name="PenInfobox_Copy5" Grid.Column="5" Stroke="{DynamicResource ScorebugWhite}" StrokeThickness="2" Fill="#FFC8C800" Grid.RowSpan="1" Grid.Row="2" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="AwayPPTypeField_Copy1" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="5" Text="4-on-4" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="2" Padding="0,1,0,0" Height="32" Grid.ColumnSpan="2" Margin="0,0,80,0"/>
-            <TextBlock x:Name="AwayPPClockField_Copy1" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontFamily="Circular Std Bold" FontSize="24" Grid.Column="6" Text="2:00" Foreground="{DynamicResource ScorebugBlackText}" Grid.Row="2" Padding="0,1,0,0" Height="32" Margin="30,0,0,0"/>
-            <Rectangle Grid.ColumnSpan="2" Fill="#3FFFFFFF" StrokeThickness="2" Grid.Row="2" Grid.Column="5" VerticalAlignment="Top" Height="12" />
-        </Grid>
+    </Window.Resources>
+    <Window.Effect>
+        <DropShadowEffect Opacity="0.1"/>
+    </Window.Effect>
+    <Grid x:Name="grid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition x:Name="MainStrip" Height="48" MinHeight="{Binding Height.Value, Converter={StaticResource ScorebugGlossScale}, RelativeSource={RelativeSource Mode=Self}}"/>
+            <RowDefinition x:Name="InfoStrip" Height="32" MinHeight="{Binding ActualHeight, Converter={StaticResource ScorebugGlossScale}, Mode=OneWay, RelativeSource={RelativeSource Mode=Self}}" />
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="23*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Canvas x:Name="PowerplayDisp" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2">
+            <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Height="32" Width="280" Background="{DynamicResource ScorebugWhite}" CornerRadius="0,0,10,10" Margin="0,48,0,0"/>
+            <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Height="32" Width="280" Background="#FFC8C800" CornerRadius="10,10,10,10" Margin="0,48,0,0"/>
+            <TextBlock x:Name="PPTypeField" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Top" FontSize="24" Text="POWERPLAY" Foreground="{DynamicResource ScorebugBlackText}" Padding="0,1,0,0" Height="32" HorizontalAlignment="Center" Width="196" Canvas.Top="1" Margin="0,48,0,0"/>
+            <TextBlock x:Name="PPClockField" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="2:00" Foreground="{DynamicResource ScorebugBlackText}" Padding="0,1,0,0" Height="32" HorizontalAlignment="Left" Canvas.Left="196" Canvas.Top="1" Width="84" Margin="0,48,0,0"/>
+            <Border Height="32" Width="280" Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="0,0,10,10" Margin="0,48,0,0"/>
+        </Canvas>
+        <Canvas x:Name="DelayedPenDisp" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3" Height="32" Width="280">
+            <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Height="32" Width="280" Background="{DynamicResource ScorebugWhite}" CornerRadius="0,0,10,10"/>
+            <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Height="32" Width="280" Background="#FFC8102E" CornerRadius="10,10,10,10"/>
+            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="DELAYED PENALTY" Foreground="{DynamicResource ScorebugWhiteFill}" Padding="0,1,0,0" Height="32" HorizontalAlignment="Left" Canvas.Top="1" Width="280"/>
+            <Border Height="32" Width="280" Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="0,0,10,10"/>
+        </Canvas>
+        <Canvas x:Name="EmptyNetDisp" Grid.Column="1" Grid.RowSpan="1" Grid.Row="4" Height="32" Width="196">
+            <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Height="32" Width="196" Background="{DynamicResource ScorebugWhite}" CornerRadius="0,0,10,10"/>
+            <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Height="32" Width="196" Background="{DynamicResource ScorebugWhiteFill}" CornerRadius="10,10,10,10"/>
+            <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="EMPTY NET" Foreground="{DynamicResource ScorebugBlackText}" Padding="0,1,0,0" Height="32" HorizontalAlignment="Left" Canvas.Top="1" Width="196"/>
+            <Border Height="32" Width="196" Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="0,0,10,10"/>
+        </Canvas>
+        <Canvas x:Name="EvenStrengthNote_Old" Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1" Grid.RowSpan="2" Visibility="Hidden">
+            <Border Height="48" Background="{DynamicResource ScorebugWhite}" CornerRadius="0,10,0,10" Width="196" BorderBrush="{DynamicResource ScorebugWhite}" Margin="0,15.9,0,0"/>
+            <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Height="32" Background="{DynamicResource ScorebugWhiteFill}" CornerRadius="10,10,10,10" Width="196" Margin="0,48,0,0"/>
+            <TextBlock x:Name="ESTypeField_old" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="4-on-4" Foreground="{DynamicResource ScorebugBlackText}" Padding="0,1,0,0" Height="32" HorizontalAlignment="Left" Width="88" Margin="0,48,0,0"/>
+            <TextBlock x:Name="ESClockField_old" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="2:00" Foreground="{DynamicResource ScorebugBlackText}" Padding="0,1,0,0" Height="32" HorizontalAlignment="Right" Canvas.Left="104" Canvas.Top="1" Width="82" Margin="0,48,0,0"/>
+            <Border Height="48" Width="196" Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="12,12,0,0" Margin="0,0,0,0"/>
+            <Border Height="32" Width="196" Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="0,0,11,11" Margin="0,48,0,0"/>
+            <Canvas Height="80" Width="196"/>
+        </Canvas>
+        <Canvas Grid.Column="5" Grid.Row="1" Grid.RowSpan="2" Grid.ColumnSpan="2">
+            <Grid Height="80" Width="196">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Border Background="{DynamicResource ScorebugWhite}" CornerRadius="0,10,0,10" BorderBrush="{DynamicResource ScorebugWhite}" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2" Background="{DynamicResource ScorebugWhiteFill}" CornerRadius="10,10,10,10" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Row="1"/>
+                <TextBlock x:Name="ESTypeField" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="4-on-4" Foreground="{DynamicResource ScorebugBlackText}" Padding="0,1,0,0" Grid.Row="1"/>
+                <TextBlock x:Name="ESClockField" Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="24" Text="2:00" Foreground="{DynamicResource ScorebugBlackText}" Padding="0,1,0,0" Canvas.Left="104" Canvas.Top="1" Grid.Row="1" Grid.Column="1"/>
+                <Border Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="12,12,0,0" Margin="0,0,0,0" Grid.Row="0" Grid.RowSpan="1" Grid.ColumnSpan="2"/>
+                <Border Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="0,0,11,11" Grid.RowSpan="1" Grid.ColumnSpan="2" Grid.Row="1"/>
+            </Grid>
+        </Canvas>
+        <Border BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2" Grid.Row="1" CornerRadius="10,10,10,10" Grid.ColumnSpan="7" Background="{DynamicResource ScorebugWhite}"/>
+        <Border BorderThickness="2" Grid.Row="1" CornerRadius="10,10,10,10" Background="{DynamicResource KBHL_Blue}"/>
+        <Border BorderThickness="2" Grid.Row="1" CornerRadius="10,10,10,10" Grid.Column="1" Background="Blue"/>
+        <Border BorderThickness="2" Grid.Row="1" CornerRadius="10,10,10,10" Grid.Column="2" Background="{DynamicResource ScorebugBlackText}"/>
+        <Border BorderThickness="2" Grid.Row="1" CornerRadius="10,10,10,10" Grid.Column="3" Background="Red"/>
+        <Border BorderThickness="2" Grid.Row="1" CornerRadius="10,10,10,10" Grid.Column="4" Background="{DynamicResource ScorebugBlackText}"/>
+        <Border BorderThickness="2" Grid.Row="1" CornerRadius="10,10,10,10" Grid.Column="5" Background="{DynamicResource ScorebugWhiteFill}" Grid.ColumnSpan="2"/>
+        <Border CornerRadius="10,10,10,10" Grid.Row="1" BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2,2,2,2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Image Source="{DynamicResource KBHL_SmallDrawingImage}" Height="64" VerticalAlignment="Center"></Image>
+            </Grid>            
+        </Border>
+        <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" Grid.Column="1" Margin="49,2,0,0" Text="AWAY" Height="42" Foreground="{DynamicResource ScorebugWhiteFill}" Grid.Row="1"/>
+        <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" Grid.Column="3" Margin="49,2,0,0" Text="HOME" Height="42" Foreground="{DynamicResource ScorebugWhiteFill}" Grid.Row="1" FontFamily="{DynamicResource ScorebugMonoFont}" FontWeight="Bold"/>
+        <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" Grid.Column="4" Text="0" Height="42" Foreground="{DynamicResource ScorebugWhiteFill}" Grid.Row="1" Margin="0,2,0,0"/>
+        <TextBlock Style="{DynamicResource ScorebugText_Black}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" FontSize="36" Grid.Column="2" Text="0" Height="42" Foreground="{DynamicResource ScorebugWhiteFill}" Grid.Row="1" Margin="0,2,0,0"/>
+        <TextBlock x:Name="PeriodDisp" Grid.Column="5" TextWrapping="Wrap" Text="{Binding PeriodCount_bug, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OverlayWindow}}}" VerticalAlignment="Center" FontSize="36" Foreground="{DynamicResource ScorebugBlackText}" Margin="0,2,4,0" Height="42" Grid.Row="1" FontFamily="Sometype Mono" FontWeight="Bold" TextAlignment="Center"/>
+        <TextBlock x:Name="PeriodTimeDisplay" Grid.Column="6" TextWrapping="Wrap" VerticalAlignment="Center" Foreground="{DynamicResource ScorebugBlackText}" FontSize="36" TextAlignment="Center" Height="44" Grid.Row="1" Margin="0,2,0,0" Text="{Binding PeriodTimeRemaining_bug, Mode=OneWay, NotifyOnSourceUpdated=True, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OverlayWindow}}}"/>
+        <!-- #region StandardBorders -->
+
+        <Viewbox Grid.Column="3" Grid.ColumnSpan="2" Stretch="Fill" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Left">
+            <Grid Height="48" Width="280" MinWidth="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Rectangle StrokeThickness="2" Fill="#FFFF4545" RadiusX="12" RadiusY="12" Margin="280,0,0,0" Grid.RowSpan="2"/>
+                <Rectangle StrokeThickness="2" Fill="#FFF50000" Grid.RowSpan="1" Grid.Row="1" Margin="280,0,0,0"/>
+                <Rectangle StrokeThickness="2" Fill="Red" Grid.RowSpan="2" Grid.Row="2" RadiusX="12" RadiusY="12" Margin="280,0,0,0"/>
+                <Rectangle StrokeThickness="2" Fill="#FFFF4545" Grid.RowSpan="1" Grid.Row="2" Margin="280,0,0,0"/>
+                <Label Content="G    O    A    L" Grid.RowSpan="4" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" UseLayoutRounding="False" FontSize="36" FontStyle="Italic" Height="48" Width="280" Margin="280,0,0,0" Foreground="#BFFFFFFF" />
+                <Border BorderBrush="#FFFFBDBD" BorderThickness="2,2,2,2" Grid.Row="0" Grid.RowSpan="4" CornerRadius="10,10,10,10" Margin="280,0,0,0"/>
+            </Grid>
+        </Viewbox>
+        <Border x:Name="HomeTeamFrame" BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="3" CornerRadius="10,10,10,10"/>
+        <Border x:Name="AwayTeamFrame" BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2" Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="1" CornerRadius="10,10,10,10"/>
+        <Border x:Name="Frame1" BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="2" Grid.Row="1" Grid.ColumnSpan="7" CornerRadius="10,10,10,10" Visibility="Hidden"/>
+        <!--#endregion-->
+        <!--#region OverrideBorders -->
+        <Border x:Name="Frame2" Grid.Row="1" Grid.ColumnSpan="7" CornerRadius="10,10,10,10" BorderBrush="{DynamicResource ScorebugWhite}" BorderThickness="1,1,1,1" Visibility="Hidden"/>
+        <Border x:Name="Frame1Gloss" Grid.Row="1" Grid.ColumnSpan="7" Background="{DynamicResource ScorebugGradientOverlay}" CornerRadius="11,11,11,11" BorderBrush="{DynamicResource ScorebugGradientOverlay}" ClipToBounds="True"/>
+        <!--#endregion-->
+    </Grid>
 </Window>

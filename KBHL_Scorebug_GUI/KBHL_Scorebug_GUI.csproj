@@ -10,6 +10,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="Resources\Fonts\SometypeMono-Bold.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Fonts\SometypeMono-BoldItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Fonts\SometypeMono-Medium.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Fonts\SometypeMono-MediumItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Fonts\SometypeMono-Regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\Fonts\SometypeMono-RegularItalic.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Resources\Images\ClockUnderlayOpacity_128.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -89,7 +107,11 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-
+  
+  <ItemGroup>
+    <AdditionalFiles Include="Resources\Images\KBHL_Small.svg" NamespaceName="Assets" ClassName="LogoSmall" />
+  </ItemGroup>
+  
   <ItemGroup>
     <Folder Include="Classes\" />
     <Folder Include="NewFolder\" />
@@ -102,6 +124,7 @@
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="8.0.0" />
     <PackageReference Include="Node.js" Version="5.3.0" />
+    <PackageReference Include="SharpVectors" Version="1.8.4" />
   </ItemGroup>
 
   <ItemGroup>

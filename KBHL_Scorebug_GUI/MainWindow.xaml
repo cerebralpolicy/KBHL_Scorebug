@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:KBHL_Scorebug_GUI"
         xmlns:f="clr-namespace:KBHL_Scorebug_GUI.Functions"
         xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+        xmlns:Wpf="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         x:Name="window" x:Class="KBHL_Scorebug_GUI.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow" Height="720" Width="1280" ResizeMode="CanMinimize">
@@ -16,7 +17,7 @@
     </Window.Resources>
     <Grid x:Name="grid" Background="{DynamicResource ScoreboardGreenDark}" ShowGridLines="True" Margin="0,0,0,-121">
         <Grid.RowDefinitions>
-            <RowDefinition x:Name="Control" Height="3*"/>
+            <RowDefinition x:Name="Control" Height="4*"/>
             <RowDefinition x:Name="Preview"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -247,8 +248,8 @@ Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Widt
             <TextBox x:Name="SecOverride" TextWrapping="Wrap" Text="00" VerticalAlignment="Top" Width="64" Height="64" BorderThickness="8,2,0,0" Foreground="{DynamicResource ClockDisplayColour}" FontFamily="{DynamicResource ScoreboardDisplayFont}" FontSize="32" TextAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" SelectionTextBrush="{x:Null}" InputScope="Digits" Canvas.Left="64" Canvas.Top="2" MaxLines="1" MaxLength="2" SelectionBrush="{x:Null}"/>
         </Canvas>
         <Button Grid.Column="1" Content="SET" HorizontalAlignment="Center" Margin="0,221,0,0" VerticalAlignment="Top" Width="96" Height="48" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Click="SetClock_Click"/>
-        <Button Grid.Column="1" Content="▲" HorizontalAlignment="Right" Margin="0,423,78,0" VerticalAlignment="Top" Width="60" Height="54" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Click="ResetClock_Click"/>
-        <Button Grid.Column="1" Content="▼" HorizontalAlignment="Right" Margin="0,497,78,0" VerticalAlignment="Top" Width="60" Height="54" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Click="ResetClock_Click"/>
+        <Button x:Name="PeriodUp" Grid.Column="1" Content="▲" HorizontalAlignment="Right" Margin="0,423,78,0" VerticalAlignment="Top" Width="60" Height="54" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Click="PeriodUp_Click"/>
+        <Button x:Name="PeriodDown" Grid.Column="1" Content="▼" HorizontalAlignment="Right" Margin="0,497,78,0" VerticalAlignment="Top" Width="60" Height="54" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Click="PeriodDown_Click"/>
         <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0,29,0,0" TextWrapping="Wrap" Text="Time Remaining" VerticalAlignment="Top" Height="48" Width="256" FontFamily="{DynamicResource StaticInterfaceFontFamily}" TextAlignment="Center" FontSize="36" RenderTransformOrigin="0.5,0.5" Foreground="White">
             <TextBlock.RenderTransform>
                 <TransformGroup>
@@ -276,7 +277,7 @@ Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Widt
             VerticalAlignment="Top" 
             Height="128" Width="256" 
             Foreground="{DynamicResource ClockDisplayColour}" 
-            TextAlignment="Right" 
+            TextAlignment="Center" 
             FontFamily="{DynamicResource ScoreboardDisplayFont}" 
             FontSize="64" LineHeight="48" ClipToBounds="True" 
             Text="{Binding PeriodTimeRemaining_str, Mode=OneWay, RelativeSource={RelativeSource AncestorType={x:Type local:MainWindow}, Mode=FindAncestor}}" RenderTransformOrigin="0.5,0.5">
@@ -285,10 +286,509 @@ Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Widt
                     <ScaleTransform/>
                     <SkewTransform/>
                     <RotateTransform/>
-                    <TranslateTransform Y="8" X="-8"/>
+                    <TranslateTransform Y="8" X="0"/>
                 </TransformGroup>
             </TextBlock.RenderTransform>
         </TextBlock>
         <Button x:Name="OpenScorebug" Grid.Column="1" Content="OPEN" HorizontalAlignment="Center" Margin="0,561,0,0" VerticalAlignment="Top" Width="96" Height="48" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Click="OpenScorebug_Click"/>
+        <Canvas x:Name="PeriodGhost" Grid.Column="1" Margin="0,422,0,0" VerticalAlignment="Top" Width="128" Height="128">
+            <TextBlock 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                Foreground="#FF2C2300" 
+                RenderTransformOrigin="0.5,0.5" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="22" HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0" Y="8"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                Foreground="#FF2C2300" 
+                RenderTransformOrigin="0.5,0.5" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88" HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0" Y="8"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                Foreground="#FF2C2300" 
+                RenderTransformOrigin="0.5,0.5" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="64" LineHeight="48" ClipToBounds="True" Text="55" HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0" Y="8"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                Foreground="#FF2C2300" 
+                RenderTransformOrigin="0.5,0.5" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88" HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0" Y="8"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                Foreground="#FF2C2300" 
+                RenderTransformOrigin="0.5,0.5" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="64" LineHeight="48" ClipToBounds="True" Text="77" HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0" Y="8"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                Foreground="#FF2C2300" 
+                RenderTransformOrigin="0.5,0.5" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="64" LineHeight="48" ClipToBounds="True" Text="11" HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0" Y="8"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock 
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                Foreground="#FF2C2300" 
+                RenderTransformOrigin="0.5,0.5" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="**" HorizontalAlignment="Center">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform X="0" Y="8"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Canvas>
+        <TextBlock x:Name="PeriodDisplay" 
+            Grid.Column="1" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Height="128" Width="128" 
+            Foreground="{DynamicResource ClockDisplayColour}" 
+            TextAlignment="Center" 
+            FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+            FontSize="64" LineHeight="48" ClipToBounds="True" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="1" Margin="150,422,150,0" Text="{Binding PeriodCount_str, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}">
+            <TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="8" X="0"/>
+                </TransformGroup>
+            </TextBlock.RenderTransform>
+        </TextBlock>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock TextWrapping="Wrap" Text="HOME" FontFamily="Octin College Bl" FontSize="36" TextAlignment="Center" Foreground="White" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
+            <Rectangle x:Name="GoalsFrame_H" HorizontalAlignment="Center" Height="128" Width="128" Fill="Black" Stroke="{DynamicResource ScoreboardStroke}" StrokeThickness="4" Grid.RowSpan="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.Column="1"/>
+            <Canvas x:Name="GoalsGhost_H" Width="128" Height="128" Grid.RowSpan="1" Grid.Row="2" Grid.ColumnSpan="1" Grid.Column="1">
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="22" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0" Y="8"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0" Y="8"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="64" LineHeight="48" ClipToBounds="True" Text="55" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0" Y="8"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0" Y="8"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="64" LineHeight="48" ClipToBounds="True" Text="77" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0" Y="8"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="64" LineHeight="48" ClipToBounds="True" Text="11" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0" Y="8"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="**" HorizontalAlignment="Center">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform X="0" Y="8"/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+            </Canvas>
+            <TextBlock x:Name="GoalsDisplay_H" 
+                TextWrapping="Wrap" 
+                Height="128" Width="128" 
+                Foreground="{DynamicResource ClockDisplayColour}" 
+                TextAlignment="Center" 
+                FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                FontSize="64" LineHeight="48" ClipToBounds="True" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="1" Text="{Binding HomeTeamGoals_str, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:MainWindow}}}" Grid.RowSpan="1" Grid.Row="2" Grid.Column="1">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="8" X="0"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock TextWrapping="Wrap" Text="HOME" FontFamily="Octin College Bl" FontSize="36" TextAlignment="Center" Foreground="White" Grid.ColumnSpan="2" Grid.RowSpan="1"/>
+            <Grid Grid.Row="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button x:Name="HomeGoalCorrectUp" Content="▲" HorizontalAlignment="Right" VerticalAlignment="Top" Width="60" Height="54" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Grid.Row="1" Margin="0,4,36,0"/>
+                <Button x:Name="HomeGoalCorrectDown" Content="▼" HorizontalAlignment="Left" VerticalAlignment="Top" Width="60" Height="54" Background="{DynamicResource Button_BlueFill}" FontFamily="Octin College Rg" FontSize="24" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_BlueStroke}" Foreground="#FFF0F0F0" Grid.Row="1" Margin="36,4,0,-2"/>
+                <Button x:Name="HomeGoal" Content="GOAL!" HorizontalAlignment="Center" VerticalAlignment="Center" Width="144" Height="54" Background="{DynamicResource Button_RedFill}" FontFamily="Octin College Rg" FontSize="36" BorderThickness="4,2,8,4" BorderBrush="{DynamicResource Button_RedStroke}" Foreground="#FFF0F0F0" Click="HomeGoal_Click"/>
+            </Grid>
+            <TextBlock TextWrapping="Wrap" Text="GOALS" FontFamily="Octin College Bl" FontSize="36" TextAlignment="Center" Foreground="White" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Row="1" Grid.Column="1"/>
+            <Canvas x:Name="HomePen1" Grid.Row="4" Grid.Column="1" Width="128" Height="64" VerticalAlignment="Top">
+                <Canvas Grid.Column="1" Height="64" Width="128" Grid.Row="4">
+                    <Rectangle Height="64" VerticalAlignment="Top" Width="128" Fill="Black" Stroke="{DynamicResource ScoreboardStroke}" StrokeThickness="4"/>
+                </Canvas>
+                <Canvas x:Name="ClockGhost_HP1" Grid.Column="1" Width="128" Height="{Binding Width, Converter={StaticResource 2x1}, RelativeSource={RelativeSource Mode=Self}}" RenderTransformOrigin="0.5,0.5" Grid.Row="4">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="4"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="22222" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="22222" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="77777"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88888" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88:88" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88888" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88888" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="*****" HorizontalAlignment="Center"/>
+                </Canvas>
+                <Canvas x:Name="ClockCanvas_HP1" Grid.Column="1" Height="64" Width="128" Grid.Row="4">
+                    <TextBlock x:Name="ClockDisplay_HP1" TextWrapping="Wrap" Text="02:00" VerticalAlignment="Top" FontSize="32" FontFamily="{DynamicResource ScoreboardDisplayFont}" Foreground="{DynamicResource ClockDisplayColour}" Width="128" TextAlignment="Center" Canvas.Top="4"/>
+                </Canvas>
+            </Canvas>
+            <Canvas x:Name="HomePen2" Grid.Row="4" Grid.Column="1" Width="128" Height="64" VerticalAlignment="Bottom">
+                <Canvas Grid.Column="1" Height="64" Width="128" Grid.Row="4">
+                    <Rectangle Height="64" VerticalAlignment="Top" Width="128" Fill="Black" Stroke="{DynamicResource ScoreboardStroke}" StrokeThickness="4"/>
+                </Canvas>
+                <Canvas x:Name="ClockGhost_HP2" Grid.Column="1" Width="128" Height="{Binding Width, Converter={StaticResource 2x1}, RelativeSource={RelativeSource Mode=Self}}" RenderTransformOrigin="0.5,0.5" Grid.Row="4">
+                    <Canvas.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform Y="4"/>
+                        </TransformGroup>
+                    </Canvas.RenderTransform>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="22222" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="22222" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="77777"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88888" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88:88" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}" 
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88888" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="88888" HorizontalAlignment="Center"/>
+                    <TextBlock 
+                    TextWrapping="Wrap" 
+                    VerticalAlignment="Top" 
+                    Height="{Binding Parent.Height, RelativeSource={RelativeSource Mode=Self}}" Width="{Binding Parent.Width, RelativeSource={RelativeSource Mode=Self}}"
+                    Foreground="#FF2C2300" 
+                    RenderTransformOrigin="0.5,0.5" 
+                    TextAlignment="Center" 
+                    FontFamily="{DynamicResource ScoreboardDisplayFont}" 
+                    FontSize="{Binding Height, Converter={StaticResource ScaleFont}, RelativeSource={RelativeSource Mode=Self}}" LineHeight="48" ClipToBounds="True" Text="*****" HorizontalAlignment="Center"/>
+                </Canvas>
+                <Canvas x:Name="ClockCanvas_HP2" Grid.Column="1" Height="64" Width="128" Grid.Row="4">
+                    <TextBlock x:Name="ClockDisp_HP2" TextWrapping="Wrap" Text="02:00" VerticalAlignment="Top" FontSize="32" FontFamily="{DynamicResource ScoreboardDisplayFont}" Foreground="{DynamicResource ClockDisplayColour}" Width="128" TextAlignment="Center" Canvas.Top="4"/>
+                </Canvas>
+            </Canvas>
+            <TextBlock TextWrapping="Wrap" Text="PENALTIES" FontFamily="Octin College Bl" FontSize="36" TextAlignment="Center" Foreground="White" Grid.ColumnSpan="1" Grid.RowSpan="1" Grid.Row="3" Grid.Column="1"/>
+        </Grid>
     </Grid>
 </Window>

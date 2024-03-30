@@ -1,29 +1,40 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
+using Color = System.Windows.Media.Color;
+using ColorConverter = System.Windows.Media.ColorConverter;
 using Timer = System.Timers.Timer;
 using System.Windows.Threading;
+using SharpVectors;
+
 
 namespace KBHL_Scorebug_GUI
 {
+    public enum Teams
+    {
+        Home,
+        Away
+    };
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         OverlayWindow ScorebugOverlay = new OverlayWindow();
         public static int periodTimeElapsed_ds = 0;
         public static int periodTimeRemaining_ds = Mins2Dec(20);
         public static int periodCount = 1;
-        public static bool ShowOverlay = false;
+        public static bool ShowOverlay;
         // HomeTeamInfo
         public string? HomeTeamName;
         public string? HomeTeamABB;
         public string? HomeTeamHexCode;
-        public int HomeTeamGoals;
+        public int HomeTeamGoals = 0;
         public int HomeTeamPenalties;
         public bool HomeTeamDelayedPenalty;
         public bool HomeTeamEmptyNet;
@@ -33,7 +44,7 @@ namespace KBHL_Scorebug_GUI
         public string? RoadTeamName;
         public string? RoadTeamABB;
         public string? RoadTeamHexCode;
-        public int RoadTeamGoals;
+        public int RoadTeamGoals = 0;
         public int? RoadTeamPenalties;
         public bool RoadTeamDelayedPenalty;
         public bool RoadTeamEmptyNet;
@@ -43,7 +54,10 @@ namespace KBHL_Scorebug_GUI
 
         // BINDINGS
         public string PeriodTimeRemaining_str => Handlers.TimeHandler(periodTimeRemaining_ds, false);
+        public string PeriodCount_str => Handlers.PeriodHandler(periodCount);
+        public string HomeTeamGoals_str => Handlers.PeriodHandler(HomeTeamGoals);
         public string PeriodTimeRemaining_bug => Handlers.BugTimeHandler(periodTimeRemaining_ds, false);
+        public string PeriodCount_bug => Handlers.BugPeriodHandler(periodCount);
         public MainWindow()
         {
             InitializeComponent();
@@ -142,30 +156,83 @@ namespace KBHL_Scorebug_GUI
                 ShowOverlay = true;
             }
         }
+        private void PeriodUp_Click(object sender, RoutedEventArgs e)
+        {
+            periodCount++;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PeriodCount_str)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PeriodCount_bug)));
+        }
+        private void PeriodDown_Click(object sender, RoutedEventArgs e)
+        {
+            periodCount--;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PeriodCount_str)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PeriodCount_bug)));
+        }
+        private void HomeGoal_Click(object sender, RoutedEventArgs e)
+        {
+            Color greenFill = (Color)ColorConverter.ConvertFromString("#FF408040");
+            Color greenStroke = (Color)ColorConverter.ConvertFromString("#FF306030");
+            _periodTimer.Stop();
+            ClockToggle.Background = new SolidColorBrush(greenFill);
+            ClockToggle.BorderBrush = new SolidColorBrush(greenStroke);
+            ClockToggle.Content = "Start";
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PeriodTimeRemaining_str)));
+            HomeTeamGoals++;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(HomeTeamGoals_str)));
+        }
     }
 
     /// <summary>
     /// Interaction logic for OverlayWindow.xaml
     /// </summary>
+   
     public partial class OverlayWindow : Window, INotifyPropertyChanged
     {
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
         public string ScorebugTime_Str = "20:00";
         public static int periodTimeRemaining_ds = MainWindow.periodTimeRemaining_ds;
+        public static int periodCount = MainWindow.periodCount;
+        public static bool offsetPenalties;
         public string PeriodTimeRemaining_bug => Handlers.BugTimeHandler(periodTimeRemaining_ds, false);
+        public string PeriodCount_bug => Handlers.BugPeriodHandler(periodCount);
         public OverlayWindow()
         {
             InitializeComponent();
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromMilliseconds(100);
+            timer.Interval = TimeSpan.FromMilliseconds(1000/30); // 30 hz Refresh
             timer.Tick += DisplayRefresh;
             timer.Start();
             timer.Tick += (sender, o) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PeriodTimeRemaining_bug)));
+            timer.Tick += (sender, o) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(PeriodCount_bug)));
         }
         void DisplayRefresh(object sender, EventArgs e)
         {         
-          periodTimeRemaining_ds = MainWindow.periodTimeRemaining_ds;
+            periodTimeRemaining_ds = MainWindow.periodTimeRemaining_ds;
+            periodCount = MainWindow.periodCount;
         }
+        public static int AssignColumn (int teamSelection)
+        {
+            var teamSelected = (Teams)teamSelection;
+            var team = nameof(teamSelected);
+            if (team == "Home")
+            {
+                return 1;
+            }
+            else
+            {
+                return 3;
+            }
+        }
+        void checkBools (object sender, EventArgs e)
+        {
+
+
+        }
+    }
+
+    public class SvgTool
+    {
+
     }
 
     public class ScorebugData
@@ -195,6 +262,110 @@ namespace KBHL_Scorebug_GUI
     }
     public class Handlers
     {
+        public static string PeriodHandler(int period)
+        {
+            return period.ToString("D2");
+        }
+        public static string AddOrdinalIndicator(int intNumber)
+        {
+            string strIndicator = "";
+
+            if (intNumber < 20)
+            {
+                switch (intNumber)
+                {
+                case 1:
+                {
+                    strIndicator = "st";
+                    break;
+                }
+
+                case 2:
+                {
+                    strIndicator = "nd";
+                    break;
+                }
+
+                case 3:
+                {
+                    strIndicator = "rd";
+                    break;
+                }
+
+                case 4:
+                case 5:
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                case 19:
+                {
+                    strIndicator = "th";
+                    break;
+                }
+                }
+            }
+            else
+            {
+                string strNumber = "";
+                strNumber = Convert.ToString(intNumber);
+
+                char chrLast = strNumber[strNumber.Length - 1];
+
+                switch (Convert.ToString(chrLast))
+                {
+                case "1":
+                {
+                    strIndicator = "st";
+                    break;
+                }
+
+                case "2":
+                {
+                    strIndicator = "nd";
+                    break;
+                }
+
+                case "3":
+                {
+                    strIndicator = "rd";
+                    break;
+                }
+
+                default:
+                {
+                    strIndicator = "th";
+                    break;
+                }
+                }
+            }
+            return Convert.ToString(intNumber) + strIndicator;
+        }
+        public static string BugPeriodHandler(int period)
+        {
+            if (period < 3)
+            {
+                return AddOrdinalIndicator(period);
+            }
+            else if (period == 3)
+            {
+                return "OT";
+            }
+            else
+            {
+                int ot_frame = period - 2;
+                return Convert.ToString(ot_frame) + "OT";
+            }
+        }
         public static string TimeHandler(int timer,
                           bool penalty)
         {

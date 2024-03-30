@@ -15,8 +15,9 @@
     <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
     <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
     <SolidColorBrush x:Key="ScorebugBlackText" Color="#FF202020"/>
-    <SolidColorBrush x:Key="ScorebugWhite" Color="#FFE2E2E2"/>
-    <SolidColorBrush x:Key="ScorebugWhiteFill" Color="#FFB8B8B8"/>
+    <SolidColorBrush x:Key="ScorebugWhite" Color="#FFCECECE"/>
+    <SolidColorBrush x:Key="ScorebugWhiteFill" Color="#EEEEEE"/>
+    <FontFamily x:Key="ScorebugMonoFont">Sometype Mono</FontFamily>
     <Style x:Key="MinOverride_StyleNorm" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
@@ -104,4 +105,101 @@
             </MultiTrigger>
         </Style.Triggers>
     </Style>
+    <SolidColorBrush x:Key="SolidGloss" Color="#3FFFFFFF"/>
+    <LinearGradientBrush x:Key="ScorebugGradientOverlay" EndPoint="0.5,1" StartPoint="0.5,0.">
+        <GradientStop Color="#51000000" Offset="1E-05"/>
+        <GradientStop Color="#51FFFFFF" Offset="0.375"/>
+        <GradientStop Color="#00FFFFFF" Offset="0.3751"/>
+        <GradientStop Color="#00000000" Offset="0.65"/>
+        <GradientStop Color="#51000000" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="KBHL_Orange" Color="#FFF36F21"/>
+    <SolidColorBrush x:Key="NeutralBlack" Color="#FF231F20"/>
+    <SolidColorBrush x:Key="KBHL_Blue" Color="#FF00A4E0"/>
+    <DrawingImage x:Key="KBHL_SmallDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V220.26 H181.9 V0 H0 Z">
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1 M181.9,220.26z M0,0z M140.97,0L140.97,0 36.57,18.93 32.35,90.48 0,109.6 0.07,184.46 27.77,168.09 24.69,220.26 152.67,197.06 146.78,97.75 181.91,76.99 181.88,51.16 164.81,61.25 164.76,12.22 142.48,25.39z" />
+                <DrawingGroup Opacity="1">
+                    <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup>
+                            <DrawingGroup.ClipGeometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                            </DrawingGroup.ClipGeometry>
+                            <GeometryDrawing Brush="{DynamicResource KBHL_Orange}" Geometry="F1 M181.9,220.26z M0,0z M86.96,164.92C79.97,164.92 74.28,170.61 74.28,177.61 74.28,184.6 79.97,190.29 86.96,190.29 93.96,190.29 99.65,184.6 99.65,177.61 99.65,170.61 93.96,164.92 86.96,164.92" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup>
+                            <DrawingGroup.ClipGeometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                            </DrawingGroup.ClipGeometry>
+                            <GeometryDrawing Brush="{DynamicResource NeutralBlack}" Geometry="F1 M181.9,220.26z M0,0z M56.81,76.14L56.81,76.14 70.03,68.33C77.3,64.03 82.71,62.33 87.05,63 87.65,63.09 88.42,63.27 89.25,63.6L89.24,56.97 135.15,29.84 134.56,7.92 42.72,24.57 39.94,86.11 56.81,76.14z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup>
+                            <DrawingGroup.ClipGeometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                            </DrawingGroup.ClipGeometry>
+                            <GeometryDrawing Brush="#FF231F20" Geometry="F1 M181.9,220.26z M0,0z M103.7,169.89C103.86,170.46 103.98,171.04 104.07,171.65 104.69,173.47 105.04,175.4 105.04,177.43 105.04,187.44 96.89,195.59 86.87,195.59 77.23,195.59 69.35,188.04 68.76,178.55 58.78,180.25 50.74,181.34 50.74,181.34 50.74,181.34 48.65,163.41 50.83,162.46 53.01,161.5 105.32,152.58 105.32,152.58L130.8,107.59 33.84,164.62 31.56,212.55 145.72,191.85 140.46,105.2C120.14,141.08,105.11,167.55,103.7,169.89" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup>
+                            <DrawingGroup.ClipGeometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                            </DrawingGroup.ClipGeometry>
+                            <GeometryDrawing Brush="#FF231F20" Geometry="F1 M181.9,220.26z M0,0z M30.92,98.75L30.92,98.75 47.61,88.88 38.35,122.26 49.6,148.67 32.39,158.84 23.31,134.67 23.34,164.19 6.83,173.95 6.77,113.02 23.18,103.32 23.21,127.69z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup>
+                            <DrawingGroup.ClipGeometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                            </DrawingGroup.ClipGeometry>
+                            <GeometryDrawing Brush="#FF231F20" Geometry="F1 M181.9,220.26z M0,0z M51.21,147.72L51.15,86.79 73.65,73.49C79.53,70.01 83.89,68.49 86.72,68.92 89.55,69.35 90.97,72.1 90.98,77.18L90.98,77.83C90.98,78.72 90.98,79.39 90.98,79.82 90.98,80.25 90.92,80.96 90.82,81.94 90.71,82.92 90.55,83.74 90.35,84.38 90.15,85.03 89.84,85.85 89.43,86.86 89.02,87.87 88.52,88.79 87.92,89.63 87.32,90.47 86.57,91.39 85.66,92.38 84.75,93.38 83.7,94.34 82.5,95.28 84.23,94.59 85.71,94.29 86.93,94.38 88.16,94.47 89.09,94.78 89.72,95.32 90.35,95.85 90.85,96.68 91.21,97.79 91.57,98.9 91.79,99.89 91.85,100.74 91.91,101.6 91.95,102.65 91.95,103.9 91.95,107.11 91.68,110.03 91.13,112.65 90.58,115.27 89.63,117.88 88.28,120.48 86.93,123.08 85.05,125.53 82.65,127.83 80.25,130.13 77.27,132.33 73.71,134.43L51.21,147.72z M67.4,100.15L70.79,98.14C71.61,97.66 72.28,97.12 72.79,96.53 73.31,95.94 73.68,95.32 73.9,94.67 74.12,94.02 74.26,93.46 74.32,93 74.38,92.54 74.41,92.02 74.41,91.43L74.4,85.39C74.4,83.45,73.22,83.18,70.86,84.57L67.37,86.63 67.4,100.15z M67.41,109.64L67.43,127.31C68.18,126.91 68.73,126.62 69.08,126.41 73.39,123.86 75.54,121.09 75.54,118.08L75.53,110.47C75.53,108.53 75.13,107.35 74.32,106.92 73.52,106.49 72.24,106.79 70.47,107.84L67.41,109.64z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup>
+                            <DrawingGroup.ClipGeometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                            </DrawingGroup.ClipGeometry>
+                            <GeometryDrawing Brush="#FF231F20" Geometry="F1 M181.9,220.26z M0,0z M112.36,83.91L112.36,83.91 112.38,111.56 95.88,121.32 95.82,60.39 112.32,50.63 112.34,72.4 120.17,67.77 120.15,46.01 136.66,36.25 136.72,97.18 120.21,106.94 120.18,79.28z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                    <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup>
+                            <DrawingGroup.ClipGeometry>
+                                <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,0,181.9,220.26" />
+                            </DrawingGroup.ClipGeometry>
+                            <GeometryDrawing Brush="#FF231F20" Geometry="F1 M181.9,220.26z M0,0z M142.99,93.47L142.99,93.47 142.93,32.54 159.54,22.73 159.58,71.76 176.66,61.67 176.67,73.57z" />
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
 </ResourceDictionary>
